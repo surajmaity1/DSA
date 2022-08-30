@@ -4,7 +4,7 @@ public class BinarySearch {
     public static void main(String[] args) {
         int[] arr = {10, 20, 30, 40, 60, 110, 120, 130, 170};
         //System.out.println(binarySearchIteration(arr, 65));
-        System.out.println(binarySearchRecursion(arr, 0,arr.length-1, 460));
+        System.out.println(binarySearchIteration(arr,  60));
     }
     static boolean binarySearchRecursion(int[] arr, int start, int end, int target){
 
@@ -27,6 +27,11 @@ public class BinarySearch {
         return false;
     }
     static boolean binarySearchIteration(int[] arr, int target){
+
+        if (arr == null || arr.length == 0){
+            return false;
+        }
+
         int start = 0;
         int end = arr.length-1;
 
