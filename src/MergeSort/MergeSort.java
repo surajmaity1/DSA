@@ -3,6 +3,7 @@ package MergeSort;
 import java.util.Arrays;
 
 public class MergeSort {
+
     public static void main(String[] args) {
         int[] arr = { 120, -10, 110,  40, 60,20, -30,130, -170};
         mergeSortInPlace(arr, 0, arr.length);
