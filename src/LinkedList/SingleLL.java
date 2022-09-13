@@ -1,5 +1,5 @@
 package LinkedList;
-
+//TODO: COMPLETE IT AS SOON AS POSSIBLE
 public class SingleLL {
     private Node head;
     private Node tail;
