@@ -2,7 +2,7 @@ package Heap;
 
 import java.util.Arrays;
 
-public class Heap {
+public class HeapSort {
     static void heapify(int[] arr, int n, int currIdx){
         int largest = currIdx;
         int left = 2 * currIdx + 1;
@@ -44,10 +44,21 @@ public class Heap {
         a[f] = a[l];
         a[l] = temp;
     }
+    static void heapSort(int[] arr){
+        int n = arr.length - 1;
+
+        while (n > 0){
+            swap(arr, n, 0);
+            n--;
+            heapify(arr, n, 0);
+        }
+    }
     public static void main(String[] args) {
         int[] arr = {1, 3, 5, 4, 6, 13, 10, 9, 8, 15, 17};
         int n = arr.length;
         buildHeap(arr, n);
+        System.out.println(Arrays.toString(arr));
+        heapSort(arr);
         System.out.println(Arrays.toString(arr));
     }
 }
