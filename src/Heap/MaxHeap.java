@@ -12,6 +12,12 @@ public class MaxHeap {
     }
 
     public void insert(int node){
+
+        if (size >= max){
+            System.out.println("Insertion not possible");
+            return;
+        }
+
         heap[size] = node;
         int currentNodeIndex = size;
 
@@ -95,6 +101,7 @@ public class MaxHeap {
 
         maxHeap.print();
 
+        System.out.println("Remove max :" + maxHeap.removeElement());
         maxHeap.print();
     }
 }
