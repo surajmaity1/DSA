@@ -10,9 +10,9 @@ public class LLMain {
         ll.insertLast(5);
         ll.insertLast(8);
         ll.display();
-        ll.insertAt(6, 6);
+
+        ll.reverseIteration();
         ll.display();
-        ll.insertAt(7, 7);
-        ll.display();
+
     }
 }

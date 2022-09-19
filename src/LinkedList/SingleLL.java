@@ -74,6 +74,41 @@ public class SingleLL {
         return node;
     }
 
+    //reverse Linked List using Recursion
+    public void reverseRecursion(Node node){
+        if (node == head){
+            head = tail;
+            return;
+        }
+
+        reverseRecursion(node.next);
+        tail.next = node;
+        tail = node;
+        tail.next = null;
+    }
+
+    //reverse Linked List using Iteration
+    public void reverseIteration(){
+        if (head == null|| size < 2) return;
+
+        Node prev = null;
+        Node present = head;
+        Node nextPtr = present.next;
+
+        while (present != null){
+            present.next = prev;
+            prev = present;
+            present = nextPtr;
+
+            if (nextPtr != null) nextPtr = nextPtr.next;
+
+        }
+
+        // present will point to null and
+        // prev will point to the last node and it will be head;
+        head = prev;
+    }
+
     public void display(){
         System.out.print("Linked List: ");
         if (head == null){
