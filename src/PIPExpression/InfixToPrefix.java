@@ -6,7 +6,7 @@ public class InfixToPrefix {
 
     public static void main(String[] args) {
         String expr = "K+L-M*N+(O^P)*W/U/V*T+Q";
-        System.out.println(infixToPrefix(expr));;
+        System.out.println(infixToPrefix(expr));
     }
 
     static String infixToPrefix(String str){
