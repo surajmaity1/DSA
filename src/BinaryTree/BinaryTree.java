@@ -108,15 +108,14 @@ public class BinaryTree {
 
         return Math.max(leftHeight, rightHeight) + 1;
     }
-    public static void diameter(Node root, int[] diameter){
-        if (root == null) return;
+    public static int diameter(Node root, int[] diameter){
+        if (root == null) return 0;
 
-        Integer leftHeight = height(root.left);
-        Integer rightHeight = height(root.right);
+        int leftHeight = diameter(root.left, diameter);
+        int rightHeight = diameter(root.right, diameter);
+
         diameter[0] = Math.max(diameter[0], (leftHeight + rightHeight));
-
-        diameter(root.left, diameter);
-        diameter(root.right, diameter);
+        return Math.max(leftHeight, rightHeight) + 1;
     }
     public static void main(String[] args) {
         int[] nodes = {1,2,4,-1,-1,5,-1,-1,3,-1,6,-1,-1};
