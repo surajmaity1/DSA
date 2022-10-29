@@ -130,6 +130,7 @@ public class DijkstraAlgorithmPQ {
 
          */
 
+        /*
         adj.get(0).add(new Node(1,7));
         adj.get(0).add(new Node(7,8));
         adj.get(1).add(new Node(2,8));
@@ -144,6 +145,37 @@ public class DijkstraAlgorithmPQ {
         adj.get(3).add(new Node(4,9));
         adj.get(3).add(new Node(5,14));
         adj.get(5).add(new Node(4,10));
+
+         */
+
+        adj.get(0).add(new Node(1,7));
+        adj.get(1).add(new Node(0,7));
+        adj.get(0).add(new Node(7,8));
+        adj.get(7).add(new Node(0,8));
+        adj.get(1).add(new Node(2,8));
+        adj.get(2).add(new Node(1,8));
+        adj.get(1).add(new Node(7,11));
+        adj.get(7).add(new Node(1,11));
+        adj.get(7).add(new Node(8,7));
+        adj.get(8).add(new Node(7,7));
+        adj.get(7).add(new Node(6,1));
+        adj.get(6).add(new Node(7,1));
+        adj.get(2).add(new Node(3,7));
+        adj.get(3).add(new Node(2,7));
+        adj.get(2).add(new Node(8,2));
+        adj.get(8).add(new Node(2,2));
+        adj.get(2).add(new Node(5,4));
+        adj.get(5).add(new Node(2,4));
+        adj.get(6).add(new Node(8,6));
+        adj.get(8).add(new Node(6,6));
+        adj.get(5).add(new Node(6,2));
+        adj.get(6).add(new Node(5,2));
+        adj.get(3).add(new Node(4,9));
+        adj.get(4).add(new Node(3,9));
+        adj.get(3).add(new Node(5,14));
+        adj.get(5).add(new Node(3,14));
+        adj.get(5).add(new Node(4,10));
+        adj.get(4).add(new Node(5,10));
 
         // Calculating the single source shortest path
         DijkstraAlgorithmPQ dpq = new DijkstraAlgorithmPQ(V);
