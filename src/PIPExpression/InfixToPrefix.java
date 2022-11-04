@@ -67,12 +67,21 @@ public class InfixToPrefix {
     }
 
 
+    // below two funs are same
+
+//    static int priorityChecker(char c){
+//        return switch (c) {
+//            case '+', '-' -> 1;
+//            case '*', '/' -> 2;
+//            case '^' -> 3;
+//            default -> 0;
+//        };
+//    }
+
     static int priorityChecker(char c){
-        return switch (c) {
-            case '+', '-' -> 1;
-            case '*', '/' -> 2;
-            case '^' -> 3;
-            default -> 0;
-        };
+        if (c == '+' || c == '-') return 1;
+        else if (c == '*' || c == '/') return 2;
+        else if (c == '^') return 3;
+        else return 0;
     }
 }
