@@ -5,50 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1cc5946-ced5-4aac-8f9c-5dbc05197acf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/description.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/project-template.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DSA.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/DSA/com/company/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/BinarySearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/CeilingOfSortedArr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/FloorOfSortedArr.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/NthRootOfANumber.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/OrderAgnosticBinarySearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinarySearch/SQRT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinaryTree/BTPT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinaryTree/BinaryTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinaryTree/LOT.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BinaryTree/PIP_In_One.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BubbleSort/BubbleSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CyclicSort/CyclicSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DijkstraAlgorithm/DijkstraAlgorithm.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DijkstraAlgorithm/DijkstraAlgorithmPQ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph/BFS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph/DFS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Graph/GR.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/Heap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/HeapSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/MaxHeap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/MaxHeapUsingPQ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/MinHeap.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Heap/MinHeapUsingPQ.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/InsertionSort/InsertionSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LinearSearch/LinearSearch.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LinkedList/LLMain.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LinkedList/SingleLL.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MergeSort/MergeSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PIPExpression/InfixToPrefix.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Practices/Program.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/QuickSort/QuickSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SelectionSort/SelectionSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TopologicalSort/TopologicalSort.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primsAlgorithm/PrimsAlgorithm.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/surajmyt/ArrayProgram/ArrayOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/ArrayProgram/ArrayOperation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +17,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="JUnit5 Test Class" />
       </list>
     </option>
@@ -87,9 +47,19 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.ArrayOperation.executor&quot;: &quot;Run&quot;,
     &quot;Application.BinarySearch.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ImprovingLinearSearch.executor&quot;: &quot;Run&quot;,
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Application.Program.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TestDemo.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ArrayOperationTest.appendTest1.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ArrayOperationTest.arrayInitializationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ArrayOperationTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ArrayOperationTest.initializationTest1.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImprovingLinearSearchTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImprovingLinearSearchTest.test3.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ImprovingLinearSearchTest.test4.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TestDemoTest.createTest1.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.TestDemoTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -98,7 +68,11 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/recylebin/del_now/DSA/DSA/src/main/java/org/surajmyt&quot;
+    &quot;last_opened_file_path&quot;: &quot;D:/codes/DSA&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -109,16 +83,18 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.surajmyt.LinearSearch" />
+      <recent name="org.surajmyt.ArrayProgram" />
       <recent name="org.surajmyt.Practices" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="BinarySearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.BinarySearch.BinarySearch" />
+  <component name="RunManager" selected="Application.ArrayOperation">
+    <configuration name="ArrayOperation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.ArrayProgram.ArrayOperation" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.BinarySearch.*" />
+          <option name="PATTERN" value="org.surajmyt.ArrayProgram.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -126,12 +102,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Main" />
+    <configuration name="BinarySearch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.BinarySearch.BinarySearch" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.*" />
+          <option name="PATTERN" value="org.surajmyt.BinarySearch.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -152,32 +128,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDemoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImprovingLinearSearchTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.Practices.*" />
+          <option name="PATTERN" value="org.surajmyt.LinearSearch.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.surajmyt.Practices" />
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Practices.TestDemoTest" />
+      <option name="PACKAGE_NAME" value="org.surajmyt.LinearSearch" />
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinearSearch.ImprovingLinearSearchTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestDemoTest.createTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ImprovingLinearSearchTest.test4" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.Practices.*" />
+          <option name="PATTERN" value="org.surajmyt.LinearSearch.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.surajmyt.Practices" />
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Practices.TestDemoTest" />
-      <option name="METHOD_NAME" value="createTest1" />
+      <option name="PACKAGE_NAME" value="org.surajmyt.LinearSearch" />
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinearSearch.ImprovingLinearSearchTest" />
+      <option name="METHOD_NAME" value="test4" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -185,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.TestDemoTest" />
-        <item itemvalue="JUnit.TestDemoTest.createTest1" />
-        <item itemvalue="Application.BinarySearch" />
+        <item itemvalue="Application.ArrayOperation" />
         <item itemvalue="Application.TestDemo" />
+        <item itemvalue="Application.BinarySearch" />
+        <item itemvalue="JUnit.ImprovingLinearSearchTest" />
+        <item itemvalue="JUnit.ImprovingLinearSearchTest.test4" />
       </list>
     </recent_temporary>
   </component>

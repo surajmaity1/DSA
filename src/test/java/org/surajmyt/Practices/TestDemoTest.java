@@ -17,6 +17,6 @@ class TestDemoTest {
     void createTest2() {
         int size1 = -1;
         boolean result1 = TestDemo.create(size1);
-        assertTrue(result1, "Expected true with size = " + size1);
+        assertFalse(result1, "Expected true with size = " + size1);
     }
 }
