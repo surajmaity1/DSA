@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1cc5946-ced5-4aac-8f9c-5dbc05197acf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/LinkedList/DoublyCircularLinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/LinkedList/DoublyLinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/LinkedList/SingleCircularLinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/StackImplementation/StackUsingArray.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/StackImplementation/StackUsingLinkedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/surajmyt/Practices/TestDemoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/surajmyt/Practices/TestDemoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +59,8 @@
     "Application.Main.executor": "Run",
     "Application.Program.executor": "Run",
     "Application.SingleCircularLinkedList.executor": "Run",
+    "Application.StackUsingArray.executor": "Run",
+    "Application.StackUsingLinkedList.executor": "Run",
     "Application.TestDemo.executor": "Run",
     "JUnit.ArrayOperationTest.appendTest1.executor": "Run",
     "JUnit.ArrayOperationTest.arrayInitializationTest.executor": "Run",
@@ -94,20 +97,7 @@
       <recent name="org.surajmyt.Practices" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.DoublyCircularLinkedList">
-    <configuration name="ArrayOperation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.ArrayProgram.ArrayOperation" />
-      <module name="DSA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.surajmyt.ArrayProgram.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.StackUsingLinkedList">
     <configuration name="DoublyCircularLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinkedList.DoublyCircularLinkedList" />
       <module name="DSA" />
@@ -134,12 +124,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Main" />
+    <configuration name="StackUsingArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.StackImplementation.StackUsingArray" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.*" />
+          <option name="PATTERN" value="org.surajmyt.StackImplementation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -147,12 +137,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SingleCircularLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinkedList.SingleCircularLinkedList" />
+    <configuration name="StackUsingLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.StackImplementation.StackUsingLinkedList" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.LinkedList.*" />
+          <option name="PATTERN" value="org.surajmyt.StackImplementation.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Practices.TestDemo" />
+      <module name="DSA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.surajmyt.Practices.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -162,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.StackUsingLinkedList" />
+        <item itemvalue="Application.TestDemo" />
+        <item itemvalue="Application.StackUsingArray" />
         <item itemvalue="Application.DoublyCircularLinkedList" />
         <item itemvalue="Application.DoublyLinkedList" />
-        <item itemvalue="Application.SingleCircularLinkedList" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.ArrayOperation" />
       </list>
     </recent_temporary>
   </component>
