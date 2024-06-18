@@ -5,11 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f1cc5946-ced5-4aac-8f9c-5dbc05197acf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/StackImplementation/StackUsingArray.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/StackImplementation/StackUsingLinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/QueueImplementation/PriorityQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/QueueImplementation/PriorityQueueLinkedList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/surajmyt/Practices/TestDemoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/surajmyt/Practices/TestDemoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,11 +51,25 @@
   "keyToString": {
     "Application.ArrayOperation.executor": "Run",
     "Application.BinarySearch.executor": "Run",
+    "Application.CircularQueue (1).executor": "Run",
+    "Application.CircularQueue.executor": "Run",
+    "Application.DemoQueue.executor": "Run",
+    "Application.Deque.executor": "Run",
+    "Application.Dequeue.executor": "Run",
     "Application.DoublyCircularLinkedList.executor": "Run",
     "Application.DoublyLinkedList.executor": "Run",
     "Application.ImprovingLinearSearch.executor": "Run",
     "Application.Main.executor": "Run",
+    "Application.PriorityQueue.executor": "Run",
+    "Application.PriorityQueueLinkedList.executor": "Run",
     "Application.Program.executor": "Run",
+    "Application.QueueDoublePointer (1).executor": "Run",
+    "Application.QueueDoublePointer (2).executor": "Run",
+    "Application.QueueDoublePointer (3).executor": "Run",
+    "Application.QueueDoublePointer.executor": "Run",
+    "Application.QueueLinkedList.executor": "Run",
+    "Application.QueueSinglePointer (1).executor": "Run",
+    "Application.QueueSinglePointer.executor": "Run",
     "Application.SingleCircularLinkedList.executor": "Run",
     "Application.StackUsingArray.executor": "Run",
     "Application.StackUsingLinkedList.executor": "Run",
@@ -81,7 +93,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "editor.preferences.fonts.default"
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -97,13 +109,13 @@
       <recent name="org.surajmyt.Practices" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.StackUsingLinkedList">
-    <configuration name="DoublyCircularLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinkedList.DoublyCircularLinkedList" />
+  <component name="RunManager" selected="Application.PriorityQueueLinkedList">
+    <configuration name="Deque" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.Deque" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.LinkedList.*" />
+          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -111,12 +123,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DoublyLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.LinkedList.DoublyLinkedList" />
+    <configuration name="Dequeue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.Dequeue" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.LinkedList.*" />
+          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -124,12 +136,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StackUsingArray" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.StackImplementation.StackUsingArray" />
+    <configuration name="PriorityQueue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.PriorityQueue" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.StackImplementation.*" />
+          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -137,12 +149,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="StackUsingLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.StackImplementation.StackUsingLinkedList" />
+    <configuration name="PriorityQueueLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.PriorityQueueLinkedList" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.StackImplementation.*" />
+          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -165,11 +177,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.StackUsingLinkedList" />
+        <item itemvalue="Application.PriorityQueueLinkedList" />
+        <item itemvalue="Application.PriorityQueue" />
         <item itemvalue="Application.TestDemo" />
-        <item itemvalue="Application.StackUsingArray" />
-        <item itemvalue="Application.DoublyCircularLinkedList" />
-        <item itemvalue="Application.DoublyLinkedList" />
+        <item itemvalue="Application.Deque" />
+        <item itemvalue="Application.Dequeue" />
       </list>
     </recent_temporary>
   </component>
