@@ -47,3 +47,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### ignore class files ###
+*.class
+
+# ignore node modules
+node_modules

@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f1cc5946-ced5-4aac-8f9c-5dbc05197acf" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/QueueImplementation/PriorityQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/QueueImplementation/PriorityQueueLinkedList.java" afterDir="false" />
+    <list default="true" id="f1cc5946-ced5-4aac-8f9c-5dbc05197acf" name="Changes" comment="🌳 tree implementation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadeBT.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/tree/BinaryTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/surajmyt/Practices/TestDemo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,8 +52,12 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AreaCalculator.executor": "Run",
+    "Application.AreaCalculatorClient.executor": "Run",
     "Application.ArrayOperation.executor": "Run",
     "Application.BinarySearch.executor": "Run",
+    "Application.BinaryTree (1).executor": "Run",
+    "Application.BinaryTree.executor": "Run",
     "Application.CircularQueue (1).executor": "Run",
     "Application.CircularQueue.executor": "Run",
     "Application.DemoQueue.executor": "Run",
@@ -74,6 +81,9 @@
     "Application.StackUsingArray.executor": "Run",
     "Application.StackUsingLinkedList.executor": "Run",
     "Application.TestDemo.executor": "Run",
+    "Application.ThreadedBinaryTree (1).executor": "Run",
+    "Application.ThreadedBinaryTree.executor": "Debug",
+    "Application.Tree.executor": "Run",
     "JUnit.ArrayOperationTest.appendTest1.executor": "Run",
     "JUnit.ArrayOperationTest.arrayInitializationTest.executor": "Run",
     "JUnit.ArrayOperationTest.executor": "Run",
@@ -87,10 +97,11 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/codes/DSA",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "preferences.lookFeel"
@@ -109,13 +120,13 @@
       <recent name="org.surajmyt.Practices" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.PriorityQueueLinkedList">
-    <configuration name="Deque" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.Deque" />
+  <component name="RunManager" selected="Application.ThreadedBinaryTree">
+    <configuration name="BinaryTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.tree.BinaryTree" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
+          <option name="PATTERN" value="org.surajmyt.tree.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -123,38 +134,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Dequeue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.Dequeue" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.Main" />
       <module name="DSA" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PriorityQueue" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.PriorityQueue" />
-      <module name="DSA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PriorityQueueLinkedList" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.surajmyt.QueueImplementation.PriorityQueueLinkedList" />
-      <module name="DSA" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.surajmyt.QueueImplementation.*" />
+          <option name="PATTERN" value="org.surajmyt.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -175,13 +160,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ThreadedBinaryTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.surajmyt.ThreadedBinaryTree.ThreadedBinaryTree" />
+      <module name="DSA" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.surajmyt.ThreadedBinaryTree.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PriorityQueueLinkedList" />
-        <item itemvalue="Application.PriorityQueue" />
+        <item itemvalue="Application.ThreadedBinaryTree" />
         <item itemvalue="Application.TestDemo" />
-        <item itemvalue="Application.Deque" />
-        <item itemvalue="Application.Dequeue" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.BinaryTree" />
       </list>
     </recent_temporary>
   </component>
@@ -194,6 +191,66 @@
       <option name="presentableId" value="Default" />
       <updated>1717157491516</updated>
     </task>
+    <task id="LOCAL-00001" summary="🌳 tree implementation">
+      <option name="closed" value="true" />
+      <created>1719810282707</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1719810282707</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" tree implementation" />
+    <option name="LAST_COMMIT_MESSAGE" value=" tree implementation" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>122</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>124</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>123</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/surajmyt/ThreadedBinaryTree/ThreadedBinaryTree.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
