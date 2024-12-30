@@ -25,6 +25,38 @@ function constructRecursive(root, item) {
     return root;
 }
 
+function constructIterative(root, data) {
+
+    if (root === null) {
+        return new Node(data);
+    }
+
+    let pointer = root;
+    let current = null;
+
+    while (pointer !== null) {
+        current = pointer;
+        if (data < pointer.data) {
+            pointer = pointer.left;
+        }
+        else if (data > pointer.data) {
+            pointer = pointer.right;
+        }
+        else {
+            console.log(`${data} already present`);
+            return root;
+        }
+    }
+    if (data < current.data) {
+        current.left = new Node(data);
+    }
+    else {
+        current.right = new Node(data);
+    }
+
+    return root;
+}
+
 // Recursive search
 function searchRecursive(root, data) {
     if (root === null) {
@@ -77,11 +109,41 @@ function findMinRecursive(root) {
     return findMinRecursive(root.left);
 }
 
+function findMaxRecursive(root) {
+    if (root === null) {
+        return null;
+    }
+    if (root.right === null) {
+        return root;
+    }
+    return findMaxRecursive(root.right);
+}
+
+function findMaxIterative(root) {
+    if (root === null) {
+        return null;
+    }
+
+    while (root.right !== null) {
+        root = root.right;
+    }
+
+    return root;
+}
+
 function preorderRecursive(root) {
     if (root !== null) {
-        preorderRecursive(root.left);
         console.log(root.data);
+        preorderRecursive(root.left);
         preorderRecursive(root.right);
+    }
+}
+
+function inorderRecursive(root) {
+    if (root !== null) {
+        inorderRecursive(root.left);
+        console.log(root.data);
+        inorderRecursive(root.right);
     }
 }
 
@@ -91,12 +153,12 @@ function main() {
 
     // Construct BST
     for (const item of arr) {
-        root = constructRecursive(root, item);
+        root = constructIterative(root, item);
     }
 
-    // Pre-order traversal
-    console.log("PreOrder:");
-    preorderRecursive(root);
+    // InOrder traversal
+    console.log("InOrder:");
+    inorderRecursive(root);
 
     // Search
     const searchValue = 34;
@@ -111,6 +173,12 @@ function main() {
     const minNode = findMinIterative(root);
     if (minNode) {
         console.log(`Minimum value: ${minNode.data}`);
+    }
+
+    // Find maximum
+    const maxNode = findMaxIterative(root);
+    if (maxNode) {
+        console.log(`Maximum value: ${maxNode.data}`);
     }
 }
 
