@@ -57,6 +57,80 @@ function constructIterative(root, data) {
     return root;
 }
 
+function deleteNodeRecursive(root, data) {
+    if (root === null) {
+        return null;
+    }
+
+    if (data < root.data) {
+        root.left = deleteNodeRecursive(root.left, data);
+    } else if (data > root.data) {
+        root.right = deleteNodeRecursive(root.right, data);
+    } else {
+        // one child present ( either left or right )
+        if (root.left === null) {
+            return root.right;
+        } else if (root.right === null) {
+            return root.left;
+        }
+        // both child present
+        const minimumValueNode = findMinIterative(root.right);
+        root.data = minimumValueNode.data;
+        root.right = deleteNodeRecursive(root.right, root.data);
+    }
+    return root;
+}
+
+// incomplete
+function deleteNodeIterative(root, data) {
+    if (root === null) {
+        return null;
+    }
+
+    let current = root;
+    let pointer = null;
+
+    while (current !== null) {
+        pointer = current;
+
+        if (data < current.data) {
+            current = current.left;
+        } else if (data > current.data) {
+            current = current.right;
+        } else {
+
+            if (current.left === null) {
+                current = current.right;
+            } else if (current.right === null) {
+                current = current.left;
+            } else {
+                const minimumValueNode = findMinIterative(current.right);
+                current.data = minimumValueNode.data;
+                console.log(current.data);
+                helper(current.right, current.data);
+            }
+        }
+    }
+
+    return root;
+}
+
+function helper(root, value) {
+    if (root === null) {
+        return null;
+    }
+
+    if (value < root.data) {
+        root.left = helper(root.left, value);
+    } else if (value > root.data) {
+        root.right = helper(root.right, value);
+    } else {
+        return null;
+    }
+
+    return root;
+}
+
 // Recursive search
 function searchRecursive(root, data) {
     if (root === null) {
@@ -180,6 +254,14 @@ function main() {
     if (maxNode) {
         console.log(`Maximum value: ${maxNode.data}`);
     }
+
+    inorderRecursive(root);
+    const deleteNodeValue = 34;
+    console.log(`delete node: ${deleteNodeValue}`);
+    // root = deleteNodeRecursive(root, deleteNodeValue);
+    root = deleteNodeIterative(root, deleteNodeValue);
+    console.log(`${deleteNodeValue} node deleted `);
+    inorderRecursive(root);
 }
 
 // Run main
