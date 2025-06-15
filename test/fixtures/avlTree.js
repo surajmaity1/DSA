@@ -1,4 +1,4 @@
-import { Node } from "../../AVLTree/AVLTree.js";
+import { levelOrder, Node } from "../../AVLTree/AVLTree.js";
 
 
 // avl tree fixtures
@@ -17,3 +17,6 @@ testAvlTreeRoot.left.left = new Node(3);
 testAvlTreeRoot.left.right = new Node(8);
 testAvlTreeRoot.right.left = new Node(12);
 testAvlTreeRoot.right.right = new Node(16);
+
+
+levelOrder(testAvlTreeRoot);
