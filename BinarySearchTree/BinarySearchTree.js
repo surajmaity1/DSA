@@ -82,54 +82,66 @@ function deleteNodeRecursive(root, data) {
 }
 
 // incomplete
-function deleteNodeIterative(root, data) {
-    if (root === null) {
-        return null;
-    }
+function transplant(parent, currentNode, replacedNode) {
+  // check wheter current node is left or right children of parent
+  let isLeftChild = false;
 
-    let current = root;
-    let pointer = null;
+  if (parent === null) {
+    parent = replacedNode;
+  } else if (parent.left === currentNode) {
+    isLeftChild = true;
+    parent.left = replacedNode;
+  } else {
+    parent.right = replacedNode;
+  }
 
-    while (current !== null) {
-        pointer = current;
-
-        if (data < current.data) {
-            current = current.left;
-        } else if (data > current.data) {
-            current = current.right;
-        } else {
-
-            if (current.left === null) {
-                current = current.right;
-            } else if (current.right === null) {
-                current = current.left;
-            } else {
-                const minimumValueNode = findMinIterative(current.right);
-                current.data = minimumValueNode.data;
-                console.log(current.data);
-                helper(current.right, current.data);
-            }
-        }
-    }
-
-    return root;
-}
-
-function helper(root, value) {
-    if (root === null) {
-        return null;
-    }
-
-    if (value < root.data) {
-        root.left = helper(root.left, value);
-    } else if (value > root.data) {
-        root.right = helper(root.right, value);
+  if (replacedNode !== null) {
+    if (isLeftChild) {
+      parent.left = replacedNode;
     } else {
-        return null;
+      parent.right = replacedNode;
     }
-
-    return root;
+  }
 }
+
+function deleteNode(parent, replacedNode) {
+  if (replacedNode.left === null) {
+    transplant(parent, replacedNode, replacedNode.right);
+  } else if (replacedNode.right === null) {
+    transplant(parent, replacedNode, replacedNode.left);
+  } else {
+    const minimumNode = findMinIterative(replacedNode.right);
+    if (replacedNode.right !== minimumNode) {
+      transplant(parent, minimumNode, minimumNode.right);
+      minimumNode.right = replacedNode.right;
+      parent.right = minimumNode;
+    }
+    transplant(parent, replacedNode, minimumNode);
+    minimumNode.left = replacedNode.left;
+    parent.left = minimumNode;
+  }
+}
+
+function deleteNodeIterative(root, deletedNode) {
+  if (root === null || deletedNode === null) {
+    return root;
+  }
+
+  let rootParent = null;
+
+  while (root !== null) {
+    rootParent = root;
+    if (deletedNode < root.data) {
+      root = root.left;
+    } else if (deletedNode > root.data) {
+      root = root.right;
+    } else {
+      deleteNode(rootParent, root);
+      break;
+    }
+  }
+}
+
 
 // Recursive search
 function searchRecursive(root, data) {
@@ -259,7 +271,7 @@ function main() {
     const deleteNodeValue = 34;
     console.log(`delete node: ${deleteNodeValue}`);
     // root = deleteNodeRecursive(root, deleteNodeValue);
-    root = deleteNodeIterative(root, deleteNodeValue);
+    //root = deleteNodeIterative(root, deleteNodeValue);
     console.log(`${deleteNodeValue} node deleted `);
     inorderRecursive(root);
 }

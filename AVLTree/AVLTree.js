@@ -110,6 +110,10 @@ export function insert(root, data) {
     return root;
 }
 
+function deletion() {
+
+}
+
 function main() {
     let root = null;
     // original input : [ 14, 17, 11, 7, 53, 4, 13, 12, 8, 60, 19, 16, 20 ]
