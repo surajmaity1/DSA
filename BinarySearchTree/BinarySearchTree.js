@@ -97,6 +97,9 @@ function transplant(parent, currentNode, replacedNode) {
 
   if (replacedNode !== null) {
     if (isLeftChild) {
+    // console.log('replacedNode !== null')
+    // console.log('isLeftChild = true;')
+    // console.log(parent.data, replacedNode.data)
       parent.left = replacedNode;
     } else {
       parent.right = replacedNode;
@@ -108,9 +111,11 @@ function deleteNode(parent, replacedNode) {
   if (replacedNode.left === null) {
     transplant(parent, replacedNode, replacedNode.right);
   } else if (replacedNode.right === null) {
+    // console.log('replacedNode '+parent.data+" " +replacedNode.data+" " + replacedNode.left.data)
     transplant(parent, replacedNode, replacedNode.left);
   } else {
     const minimumNode = findMinIterative(replacedNode.right);
+    // console.log('parent ' + parent.data + ' '+'minimumNode ' + minimumNode.data + ' replacedNode' + replacedNode.data);
     if (replacedNode.right !== minimumNode) {
       transplant(parent, minimumNode, minimumNode.right);
       minimumNode.right = replacedNode.right;
@@ -122,20 +127,22 @@ function deleteNode(parent, replacedNode) {
   }
 }
 
-function deleteNodeIterative(root, deletedNode) {
-  if (root === null || deletedNode === null) {
-    return root;
+function deleteNodeIterative(parent, deletedNode) {
+  if (parent === null || deletedNode === null) {
+    return parent;
   }
-
+  let root = parent;
   let rootParent = null;
 
   while (root !== null) {
-    rootParent = root;
     if (deletedNode < root.data) {
+        rootParent = root;
       root = root.left;
     } else if (deletedNode > root.data) {
+        rootParent = root;
       root = root.right;
     } else {
+        // console.log(rootParent.data, root.data);
       deleteNode(rootParent, root);
       break;
     }
@@ -227,8 +234,10 @@ function preorderRecursive(root) {
 
 function inorderRecursive(root) {
     if (root !== null) {
+        // console.log('\nfirst iteration', root.data);
         inorderRecursive(root.left);
-        console.log(root.data);
+        // console.log(root.data);
+        process.stdout.write(root.data + " ");
         inorderRecursive(root.right);
     }
 }
@@ -245,7 +254,7 @@ function main() {
     // InOrder traversal
     console.log("InOrder:");
     inorderRecursive(root);
-
+    /*
     // Search
     const searchValue = 34;
     const foundNode = searchIterative(root, searchValue);
@@ -268,10 +277,12 @@ function main() {
     }
 
     inorderRecursive(root);
-    const deleteNodeValue = 34;
-    console.log(`delete node: ${deleteNodeValue}`);
+    */
+   
+    const deleteNodeValue = 20;
+    console.log(`\ndelete node: ${deleteNodeValue}`);
     // root = deleteNodeRecursive(root, deleteNodeValue);
-    //root = deleteNodeIterative(root, deleteNodeValue);
+    deleteNodeIterative(root, deleteNodeValue);
     console.log(`${deleteNodeValue} node deleted `);
     inorderRecursive(root);
 }
