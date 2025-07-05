@@ -1,0 +1,19 @@
+The issue is in how you’re modifying tree nodes and handling parents:
+    
+transplant() doesn’t update the root
+•    In transplant(), if parent is null (meaning you’re deleting the root node), you’re assigning parent = replacedNode;.
+•    But this only changes the local parent variable, not the actual root of the tree outside the function.
+•    Problem: The tree’s root is never updated in this case.
+Fix: You need to pass the root by reference or return the new root so that the caller (deleteNode) can update it.
+
+    
+deleteNode() doesn’t update parent properly
+•    In deleteNode(), after calling transplant(), you sometimes assign parent.left = minimumNode and parent.right = minimumNode.
+•    This causes duplicate or incorrect assignments if transplant() already updated the child pointers.
+Fix: Don’t manually set parent.left/right after transplant() — let transplant() handle it fully.
+    
+In deleteNodeIterative()
+•    You don’t return the updated root after deletion. If the root itself was deleted and replaced, the calling code still holds a reference to the old root.
+Fix: Always return the new root after deletion and assign it back in main().
+
+JavaScript passes objects by reference but not the reference itself. When you set parent = replacedNode inside transplant, it doesn’t change the actual tree outside the function. That’s why root updates are failing
