@@ -75,7 +75,6 @@ function deleteNodeRecursive(root, data) {
   return root;
 }
 
-// incomplete
 function transplant(parent, currentNode, replacedNode) {
   // check wheter current node is left or right children of parent
   let isLeftChild = false;
@@ -279,30 +278,29 @@ function main() {
   // InOrder traversal
   console.log("InOrder:");
   inorderRecursive(root);
-  /*
-    // Search
-    const searchValue = 34;
-    const foundNode = searchIterative(root, searchValue);
-    if (foundNode) {
-        console.log(`Found: ${foundNode.data}`);
-    } else {
-        console.log("Not found");
-    }
 
-    // Find minimum
-    const minNode = findMinIterative(root);
-    if (minNode) {
-        console.log(`Minimum value: ${minNode.data}`);
-    }
+  // Search
+  const searchValue = 34;
+  const foundNode = searchIterative(root, searchValue);
+  if (foundNode) {
+    console.log(`\nFound: ${foundNode.data}`);
+  } else {
+    console.log("Not found");
+  }
 
-    // Find maximum
-    const maxNode = findMaxIterative(root);
-    if (maxNode) {
-        console.log(`Maximum value: ${maxNode.data}`);
-    }
+  // Find minimum
+  const minNode = findMinIterative(root);
+  if (minNode) {
+    console.log(`Minimum value: ${minNode.data}`);
+  }
 
-    inorderRecursive(root);
-    */
+  // Find maximum
+  const maxNode = findMaxIterative(root);
+  if (maxNode) {
+    console.log(`Maximum value: ${maxNode.data}`);
+  }
+
+  inorderRecursive(root);
 
   const deleteNodeValue = 34;
   console.log(`\ndeleting node: ${deleteNodeValue}`);
