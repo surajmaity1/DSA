@@ -6,45 +6,42 @@ function node(value) {
   };
 }
 
-function insertAtStart(head, value) {
+function insertAtStart(head, tail, value) {
   if (head === null) {
     head = node(value);
-    head.next = head;
-    head.prev = head;
-    return head;
+    return { head, tail: head };
   }
 
   const newNode = node(value);
   newNode.next = head;
-  newNode.prev = head.prev;
-  head.prev.next = newNode;
   head.prev = newNode;
   head = newNode;
 
-  return head;
+  return { head, tail };
 }
 
-function insertAtEnd(head, value) {
+function insertAtEnd(head, tail, value) {
   if (head === null) {
     head = node(value);
-    head.next = head;
-    head.prev = head;
-    return head;
+    return { head, tail: head };
   }
 
   const newNode = node(value);
-  newNode.prev = head.prev;
-  newNode.next = head;
-  head.prev.next = newNode;
-  head.prev = newNode;
+  newNode.prev = tail;
+  tail.next = newNode;
+  tail = newNode;
 
-  return head;
+  return { head, tail };
 }
 
-function insertAfterSpecificNode(head, existingValue, newValue) {
+function insertAfterSpecificNode(head, tail, existingValue, newValue) {
   if (head === null) {
-    console.log('Doubly Linked list empty')
-    return null;
+    console.log("Doubly Linked list empty");
+    return { head, tail };
+  }
+
+  if (tail.value === existingValue) {
+    return insertAtEnd(head, tail, newValue);
   }
 
   let currentNode = head;
@@ -56,192 +53,194 @@ function insertAfterSpecificNode(head, existingValue, newValue) {
       newNode.next = currentNode.next;
       currentNode.next = newNode;
       currentNode.next.prev = newNode;
-      return head;
+      return { head, tail };
     }
     currentNode = currentNode.next;
-  } while (currentNode !== head);
+  } while (currentNode !== null);
 
-  console.log(`\n${existingValue} not found`)
-  return head;
+  console.log(`\n${existingValue} not found`);
+  return { head, tail };
 }
 
-function removeAtStart(head) {
+function removeAtStart(head, tail) {
   if (head === null) {
-    console.log('Doubly Linked list empty')
-    return null;
+    console.log("Doubly Linked list empty");
+    return { head: null, tail: null };
   }
 
-  if (head.next === head) {
-    head = null;
-    return head;
+  if (head.next === null) {
+    return { head: null, tail: null };
   }
 
-  head.prev.next = head.next;
-  head.next.prev = head.prev;
   head = head.next;
+  head.prev = null;
 
-  return head;
+  return { head, tail };
 }
 
-function removeAtEnd(head) {
-  if (head === null) {
-    console.log('Doubly Linked list empty')
-    return null;
+function removeAtEnd(head, tail) {
+  if (tail === null) {
+    console.log("Doubly Linked list empty");
+    return { head: null, tail: null };
   }
 
-  if (head.next === head) {
-    head = null;
-    return head;
+  if (tail.prev === null) {
+    return { head: null, tail: null };
   }
 
-  head.prev.prev.next = head;
-  head.prev = head.prev.prev;
+  tail = tail.prev;
+  tail.next = null;
 
-  return head;
+  return { head: head, tail: tail };
 }
 
-function removeByNodeValue(head, value) {
+function removeByNodeValue(head, tail, value) {
   if (head === null) {
-    console.log('Doubly Linked list empty')
-    return null;
-  }
-
-  if (head.prev.value === value) {
-    return removeAtEnd(head);
+    console.log("Doubly Linked list empty");
+    return { head: null, tail: null };
   }
 
   if (head.value === value) {
-    return removeAtStart(head);
+    return removeAtStart(head, tail);
   }
 
-  let currentNode = head.next;
-
-  do {
-    if (currentNode.value === value) {
-      currentNode.prev.next = currentNode.next;
-      currentNode.next.prev = currentNode.prev;
-      return head;
-    }
-    currentNode = currentNode.next;
-  } while (currentNode !== head);
-
-  console.log(`\n${value} not found`)
-  return head;
-}
-
-function search(head, value) {
-  if (head === null) {
-    console.log('Doubly Linked list: [ ]')
-    return false;
+  if (tail.value === value) {
+    return removeAtEnd(head, tail);
   }
 
   let currentNode = head;
 
   do {
     if (currentNode.value === value) {
-      return true;
+      currentNode.prev.next = currentNode.next;
+      currentNode.next.prev = currentNode.prev;
+      return { head, tail };
     }
     currentNode = currentNode.next;
-  } while (currentNode !== head);
+  } while (currentNode !== null);
+
+  console.log(`\n${value} not found`);
+  return { head, tail };
+}
+
+function search(head, value) {
+  if (head === null) {
+    console.log("Doubly Linked list: [ ]");
+    return false;
+  }
+
+  do {
+    if (head.value === value) {
+      return true;
+    }
+    head = head.next;
+  } while (head !== null);
 
   return false;
 }
 
 function display(head) {
   if (head === null) {
-    console.log('Doubly Linked list: [ ]')
+    console.log("Doubly Linked list: [ ]");
     return;
   }
 
-  let currentNode = head;
-  process.stdout.write(`\nDoubly Linked list: [ `);
+  let current = head;
+  let result = "";
 
-  do {
-    process.stdout.write(`${currentNode.value}, `);
-    currentNode = currentNode.next;
-  } while (currentNode !== head);
-
-  process.stdout.write(`]\n`);
+  while (current !== null) {
+    result += current.value + " <-> ";
+    current = current.next;
+  }
+  console.log("Doubly Linked list:", result + "null");
 }
 
-function displayReverse(head) {
-  if (head === null) {
-    console.log('Doubly Linked list: [ ]')
+function displayReverse(tail) {
+  if (tail === null) {
+    console.log("Doubly Linked list: [ ]");
     return;
   }
 
-  let currentNode = head.prev;
-  process.stdout.write(`\nDoubly Linked list reverse order: [ `);
+  let current = tail;
+  let result = "";
 
-  do {
-    process.stdout.write(`${currentNode.value}, `);
-    currentNode = currentNode.prev;
-  } while (currentNode !== head.prev);
-
-  process.stdout.write(`]\n`);
+  while (current !== null) {
+    result += current.value + " <-> ";
+    current = current.prev;
+  }
+  console.log("Doubly Linked list:", result + "null");
 }
 
 function main() {
-  // let head = null;
+  // let storage = {
+  //   head: null,
+  //   tail: null,
+  // };
 
-  // head = insertAtStart(head, 32)
-  // head = insertAtStart(head, 91)
-  // head = insertAtStart(head, 12)
-  // head = insertAtStart(head, 45)
-  // head = insertAtStart(head, 37)
+  // storage = insertAtStart(storage.head, storage.tail, 32);
+  // storage = insertAtStart(storage.head, storage.tail, 91);
+  // storage = insertAtStart(storage.head, storage.tail, 12);
+  // storage = insertAtStart(storage.head, storage.tail, 45);
+  // storage = insertAtStart(storage.head, storage.tail, 37);
 
-  // head = insertAtEnd(head, 32)
-  // head = insertAtEnd(head, 91)
-  // head = insertAtEnd(head, 12)
-  // head = insertAtEnd(head, 45)
-  // head = insertAtEnd(head, 37)
+  // storage = insertAtEnd(storage.head, storage.tail, 32);
+  // storage = insertAtEnd(storage.head, storage.tail, 91);
+  // storage = insertAtEnd(storage.head, storage.tail, 12);
+  // storage = insertAtEnd(storage.head, storage.tail, 45);
+  // storage = insertAtEnd(storage.head, storage.tail, 37);
 
-  // head = insertAfterSpecificNode(head, 32, 91)
-  // head = insertAfterSpecificNode(head, 91, 12)
-  // head = insertAfterSpecificNode(head, 12, 45)
-  // head = insertAfterSpecificNode(head, 45, 37)
+  // storage = insertAfterSpecificNode(storage.head, storage.tail, 32, 91);
+  // storage = insertAfterSpecificNode(storage.head, storage.tail, 91, 12);
+  // storage = insertAfterSpecificNode(storage.head, storage.tail, 12, 45);
+  // storage = insertAfterSpecificNode(storage.head, storage.tail, 45, 37);
 
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
-  // head = removeAtStart(head);
-  // display(head)
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
+  // storage = removeAtStart(storage.head);
+  // display(storage.head);
 
-  // displayReverse(head)
+  // displayReverse(storage.tail)
 
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
-  // head = removeAtEnd(head);
-  // display(head)
+  // display(storage.head);
+  // storage = removeAtEnd(storage.head, storage.tail);
+  // display(storage.head);
+  // storage = removeAtEnd(storage.head, storage.tail);
+  // display(storage.head);
+  // storage = removeAtEnd(storage.head, storage.tail);
+  // display(storage.head);
+  // storage = removeAtEnd(storage.head, storage.tail);
+  // display(storage.head);
+  // storage = removeAtEnd(storage.head, storage.tail);
+  // display(storage.head);
 
-  // display(head)
-  // head = removeByNodeValue(head, 32)
-  // display(head)
-  // head = removeByNodeValue(head, 91)
-  // display(head)
-  // head = removeByNodeValue(head, 12)
-  // display(head)
+  // display(storage.head);
+  // storage = removeByNodeValue(storage.head, storage.tail, 12);
+  // display(storage.head);
+  // storage = removeByNodeValue(storage.head, storage.tail, 45);
+  // display(storage.head);
+  // storage = removeByNodeValue(storage.head, storage.tail, 32);
+  // display(storage.head);
+  // storage = removeByNodeValue(storage.head, storage.tail, 91);
+  // display(storage.head);
+  // storage = removeByNodeValue(storage.head, storage.tail, 37);
+  // display(storage.head);
 
-  // display(head)
+  
+  // display(storage.head);
   // const searchingValue = 12;
-  // console.log(`Search ${searchingValue}: `, (search(head, searchingValue)) ? "Found" : "Not found")
+  // console.log(
+  //   `Search ${searchingValue}: `,
+  //   search(storage.head, searchingValue) ? "Found" : "Not found"
+  // );
 }
 
-main()
+main();
