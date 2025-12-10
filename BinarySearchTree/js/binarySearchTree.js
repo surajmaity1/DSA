@@ -78,6 +78,8 @@ function inOrderTraversal(node) {
   }
 }
 
+function inOrderTraversalIterative(node) {}
+
 function preOrderTraversal(node) {
   if (node) {
     console.log(node.value + " ");
@@ -94,6 +96,34 @@ function postOrderTraversal(node) {
   }
 }
 
+function heightRecursive(node) {
+  if (node === null) {
+    return -1;
+  }
+
+  return 1 + Math.max(heightRecursive(node.left), heightRecursive(node.right));
+}
+
+function heightIterative(node) {
+  let height = 0;
+  const queue = [node];
+
+  while (queue.length !== 0) {
+    const poppedNode = queue.shift();
+
+    if (poppedNode.left) {
+      queue.push(poppedNode.left);
+    }
+    if (poppedNode.right) {
+      queue.push(poppedNode.right);
+    }
+
+    height++;
+  }
+
+  return height;
+}
+
 function main() {
   const bstStorage = [10, 40, 20, 90, 30, 8, 9, 6, 7, 10];
   for (let index = 0; index < bstStorage.length; index++) {
@@ -101,6 +131,12 @@ function main() {
     root = insertNodeRecursive(root, bstStorage[index]);
   }
   printBinarySearchTree();
+  const node = root;
+  // const height = heightRecursive(node);
+  // console.log(`\nHeight of the binary search tree: ${height}`);
+
+  const height = heightIterative(node);
+  console.log(`\nHeight of the binary search tree: ${height}`);
 }
 
 main();

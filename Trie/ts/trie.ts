@@ -26,15 +26,13 @@ function insert(root: any, word: string): any {
     const index: number = getIndex(word[wordIndex]);
 
     if (!containsKey(current, index)) {
-      current.links[index] = createNode();
+      current.links[index] = createNode(word.substring(0, 1 + wordIndex));
     }
 
     current = current.links[index];
   }
 
-  current.value = word;
   current.isEndOfWord = true;
-
   return root;
 }
 
@@ -76,7 +74,7 @@ function deletion(root: any, word: string) {
   }
 
   let currentNode = root;
-  let prefixNode = null;
+  const stack = [root];
 
   for (let wordIndex: number = 0; wordIndex < word.length; wordIndex++) {
     const index: number = getIndex(word[wordIndex]);
@@ -85,41 +83,60 @@ function deletion(root: any, word: string) {
       return {root, found: false};
     }
 
-    if (currentNode.value === word) {
-      currentNode.value = null;
-      currentNode.isEndOfWord = false;
-      currentNode.links = null;
-      prefixNode.links[index] = null;
+    currentNode = currentNode.links[index];
+    stack.push(currentNode);
+
+    if (currentNode.value === word && currentNode.isEndOfWord === true) {
+
+      let poppedNode = stack.pop();
+      let wordLength = word.length - 1;
+      while (stack.length > 0 && !hasLinks(poppedNode)) {
+        const newIndex = getIndex(poppedNode.value[wordLength--]);
+        poppedNode = stack.pop();
+        poppedNode.links[newIndex] = undefined;
+      }
 
       return {root, found: true};
     }
-
-    prefixNode = currentNode;
-    currentNode = currentNode.links[index];
   }
 
   return {root, found: false};
+}
+
+function hasLinks(node: any): boolean {
+  for (let alphabet = 0; alphabet < 26; alphabet++) {
+    if (node.links[alphabet]) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function main() {
   let root = createNode("");
 
   root = insert(root, "apply");
+  root = insert(root, "apple");
+  root = insert(root, "apples");
+  root = insert(root, "application");
   root = insert(root, "boy");
-  // root = insert(root, "apple");
-  // root = insert(root, "application");
-  // root = insert(root, "mango");
+  root = insert(root, "mango");
 
-  const searchWord = "boy";
-  console.log(`Is ${searchWord} word present? : ${search(root, searchWord)}`);
+  // const searchWord = "boy";
+  // console.log(`Is ${searchWord} word present? : ${search(root, searchWord)}`);
 
-  const prefixWord = "bo";
-  console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
+  // const prefixWord = "bo";
+  // console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
 
-  const deleteWord = "boy";
+  const deleteWord = "application";
   let found: boolean;
   ({root, found} = deletion(root, deleteWord));
   console.log(`Is ${deleteWord} word deleted? : ${found}`);
+
+
+  const prefixWord = "appli";
+  console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
 }
 
 main();
