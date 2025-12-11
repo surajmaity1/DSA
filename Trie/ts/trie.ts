@@ -1,4 +1,4 @@
-function createNode(value?: string) {
+export function createNode(value?: string) {
   return {
     value: value,
     links: new Array<any>(26),
@@ -15,7 +15,7 @@ function containsKey(node: any, index: number) {
   return node.links[index] !== undefined;
 }
 
-function insert(root: any, word: string): any {
+export function insert(root: any, word: string): any {
   if (!word || word.length === 0) {
     return root;
   }
@@ -36,7 +36,7 @@ function insert(root: any, word: string): any {
   return root;
 }
 
-function search(root: any, word: string): boolean {
+export function search(root: any, word: string): boolean {
   return searchHelper(root, word, true);
 }
 
@@ -68,7 +68,7 @@ function searchHelper(root: any, word: string, completeWordSearch: boolean): boo
   return true;
 }
 
-function deletion(root: any, word: string) {
+export function deletion(root: any, word: string) {
   if (!word || word.length === 0) {
     return {root, found: false};
   }
@@ -129,14 +129,14 @@ function main() {
   // const prefixWord = "bo";
   // console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
 
-  const deleteWord = "application";
+  const deleteWord = "apples";
   let found: boolean;
   ({root, found} = deletion(root, deleteWord));
   console.log(`Is ${deleteWord} word deleted? : ${found}`);
 
 
-  const prefixWord = "appli";
+  const prefixWord = "apple";
   console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
 }
 
-main();
+// main();
