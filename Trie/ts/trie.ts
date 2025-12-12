@@ -3,12 +3,11 @@ export function createNode(value?: string) {
     value: value,
     links: new Array<any>(26),
     isEndOfWord: false,
-  }
+  };
 }
 
 function getIndex(index: string): number {
-  return index.charAt(0)
-    .toLowerCase().charCodeAt(0) - 97;
+  return index.charAt(0).toLowerCase().charCodeAt(0) - 97;
 }
 
 function containsKey(node: any, index: number) {
@@ -40,11 +39,15 @@ export function search(root: any, word: string): boolean {
   return searchHelper(root, word, true);
 }
 
-function isPrefix(root: any, word: string): boolean {
+export function isPrefix(root: any, word: string): boolean {
   return searchHelper(root, word, false);
 }
 
-function searchHelper(root: any, word: string, completeWordSearch: boolean): boolean {
+function searchHelper(
+  root: any,
+  word: string,
+  completeWordSearch: boolean
+): boolean {
   if (!word || word.length === 0) {
     return false;
   }
@@ -70,7 +73,7 @@ function searchHelper(root: any, word: string, completeWordSearch: boolean): boo
 
 export function deletion(root: any, word: string) {
   if (!word || word.length === 0) {
-    return {root, found: false};
+    return { root, found: false };
   }
 
   let currentNode = root;
@@ -80,27 +83,30 @@ export function deletion(root: any, word: string) {
     const index: number = getIndex(word[wordIndex]);
 
     if (!currentNode.links[index]) {
-      return {root, found: false};
+      return { root, found: false };
     }
 
     currentNode = currentNode.links[index];
     stack.push(currentNode);
 
     if (currentNode.value === word && currentNode.isEndOfWord === true) {
-
       let poppedNode = stack.pop();
       let wordLength = word.length - 1;
       while (stack.length > 0 && !hasLinks(poppedNode)) {
         const newIndex = getIndex(poppedNode.value[wordLength--]);
         poppedNode = stack.pop();
         poppedNode.links[newIndex] = undefined;
+
+        if (poppedNode.isEndOfWord) {
+          return { root, found: true };
+        }
       }
 
-      return {root, found: true};
+      return { root, found: true };
     }
   }
 
-  return {root, found: false};
+  return { root, found: false };
 }
 
 function hasLinks(node: any): boolean {
@@ -123,20 +129,23 @@ function main() {
   root = insert(root, "boy");
   root = insert(root, "mango");
 
-  // const searchWord = "boy";
-  // console.log(`Is ${searchWord} word present? : ${search(root, searchWord)}`);
+  const searchWord = "boy";
+  console.log(`Is ${searchWord} word present? : ${search(root, searchWord)}`);
 
-  // const prefixWord = "bo";
-  // console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
+  let prefixWord = "bo";
+  console.log(
+    `Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`
+  );
 
   const deleteWord = "apples";
   let found: boolean;
-  ({root, found} = deletion(root, deleteWord));
+  ({ root, found } = deletion(root, deleteWord));
   console.log(`Is ${deleteWord} word deleted? : ${found}`);
 
-
-  const prefixWord = "apple";
-  console.log(`Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`);
+  prefixWord = "apple";
+  console.log(
+    `Is ${prefixWord} word a prefix? : ${isPrefix(root, prefixWord)}`
+  );
 }
 
-// main();
+main();
