@@ -9,6 +9,7 @@ which has a length of 4.
 */
 
 //Brute Force solution
+/*
 export function longestSequenceConsecutiveIntegers(array: number[]): number {
   if (array.length === 0) {
     return 0;
@@ -32,27 +33,24 @@ export function longestSequenceConsecutiveIntegers(array: number[]): number {
 
   return Math.max(result, tempMax) + 1;
 }
+*/
 
 //Optimize solution
-// export function longestSequenceConsecutiveIntegers(array: number[]): number {
-//   if (array.length === 0) {
-//     return 0;
-//   }
-//
-//   let result: number = 0;
-//  
-//  
-//  
-//   return result;
-// }
+export function longestSequenceConsecutiveIntegers(array: number[]): number {
+  if (array.length === 0) {
+    return 0;
+  }
+
+  let result: number = 0;
+  
+  return result;
+}
 
 function main() {
   const input: number[] = [100, 4, 200, 1, 3, 2];
-  // const result: number = longestSequenceConsecutiveIntegers(input);
-  // console.log(result);
-
   const result: number = longestSequenceConsecutiveIntegers(input);
   console.log(result);
+
 }
 
 main();

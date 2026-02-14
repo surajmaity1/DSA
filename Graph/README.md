@@ -1,0 +1,1 @@
+- [Dense and sparse graph](https://en.wikipedia.org/wiki/Dense_graph)

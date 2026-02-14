@@ -53,7 +53,11 @@ function splitNonLeafNode(currentNode: node, key: number, order: number) {
   for (let index = 0; index < sibchild.length; index++) {
     newSibling.children.push(sibchild[index])
   }
-  newSibling.children.sort((firstNode, secondNode) => firstNode.keys[0] - secondNode.keys[0])
+  // newSibling.children.sort((firstNode, secondNode) => firstNode.keys[0] - secondNode.keys[0])
+
+  currentNode.children = currentNode.children.filter((child) =>
+    child.keys[0] <= currentNode.keys[currentNode.keys.length - 1]
+  )
 
   return {
     newRoot,
@@ -101,6 +105,7 @@ function splitNode(currentNode: node, key: number, order: number, queue: node[])
       newRoot = temp.newRoot;
       newSibling = temp.newSibling;
       newSibling.children.push(siblingOfCurrentNode);
+      newSibling.children.sort((child1, child2) => child1.keys[0] - child2.keys[0])
       // console.log(newSibling)
       newSibling.leaf = false;
       newSibling.next = null;
@@ -137,6 +142,10 @@ function insert(root: node | null, key: number): node {
     return splitNode(currentNode, key, order, null);
   } else {
     const queue = [currentNode];
+
+    if (key === 42) {
+      console.log(42)
+    }
 
     while (!currentNode.leaf) {
       let keyNodeToTraverse = currentNode.keys[0];
@@ -180,7 +189,16 @@ function levelOrderTraversal(root: node) {
     const poppedNode = queue.shift();
     console.log(poppedNode.keys.join(', '));
 
-    if (poppedNode.keys.length === 2 && poppedNode.keys[0] === 7 && poppedNode.keys[1] === 17 ) {
+    // if (poppedNode.keys.length === 2 && poppedNode.keys[0] === 7 && poppedNode.keys[1] === 17) {
+    //   console.log('--')
+    //   console.log(`node: `)
+    //   console.log(poppedNode)
+    //   console.log('--')
+    //   console.log(poppedNode.children)
+    //   console.log('--')
+    // }
+
+    if (poppedNode.keys.length === 1 && poppedNode.keys[0] === 25) {
       console.log('--')
       console.log(`node: `)
       console.log(poppedNode)
@@ -202,7 +220,7 @@ function main() {
 
   for (let index = 0; index < length; index++) {
     root = insert(root, input[index]);
-    if (input[index] === 28) break;
+    // if (input[index] === 28) break;
   }
 
   levelOrderTraversal(root);
