@@ -21,16 +21,8 @@ Edge cases:
 - 2. General is empty
 - 3. Ride is cancelled.
 - 4. Verficiation taking time even coming at the correct time.
-- 5. 
-- 
-- 
-- 
-- 
-- 
 
 Construction:
-
-
 
 Person p1:
 - arrival time
@@ -117,19 +109,49 @@ function input(user: UserInfo[]) {
   };
 }
 
-function sortUsersBasedonPriority(
+function sortUsersBasedOnPriority(
   users: UserInfo[],
   allowedUsers: number[],
-  userId: number,
+  newUser: UserInfo,
 ) {
-  allowedUsers.push(userId);
+  if (allowedUsers.length === 0) {
+    allowedUsers.push(newUser.id);
+    return;
+  }
+
+  for (let index = 0; index < allowedUsers.length; index++) {
+    const userId = allowedUsers[index];
+    const currentAllowedUser = users.filter((user) => user.id === userId)[0];
+
+    // console.log(`before index: ${index}, user.length: ${allowedUsers.length}`);
+    if (
+      currentAllowedUser.arrival === newUser.arrival &&
+      !currentAllowedUser.slot &&
+      newUser.slot
+    ) {
+      allowedUsers.splice(index, 0, newUser.id);
+      index++;
+      // console.log("current user id", userId, "inside if");
+    } else if (
+      currentAllowedUser.arrival !== newUser.arrival &&
+      currentAllowedUser.slot &&
+      newUser.slot
+    ) {
+      if (currentAllowedUser.slot.start > newUser.slot.start) {
+        allowedUsers.splice(index, 0, newUser.id);
+        index++;
+      }
+    }
+
+    // console.log(`after index: ${index}, user.length: ${allowedUsers.length}`);
+  }
 }
 
 export function serveWaitingUsers(
-  input: UserInfo[],
+  users: UserInfo[],
   checkInTime: TimeSlot,
 ): Result {
-  if (input.length === 0) {
+  if (users.length === 0) {
     return {
       allowed: [],
       notAllowed: [],
@@ -140,25 +162,25 @@ export function serveWaitingUsers(
   const notAllowedUsers = [];
   const allowedUsers: number[] = [];
 
-  for (let index = 0; index < input.length; index++) {
-    const eachPerson = input[index];
-    const eachPersonSlot = eachPerson.slot;
+  for (let index = 0; index < users.length; index++) {
+    const user = users[index];
+    const userSlot = user.slot;
 
     // Lightening queue
     if (
-      eachPersonSlot &&
-      eachPersonSlot.start >= checkInTime.start &&
-      eachPersonSlot.end <= checkInTime.end
+      userSlot &&
+      userSlot.start >= checkInTime.start &&
+      userSlot.end <= checkInTime.end
     ) {
-      sortUsersBasedonPriority(input, allowedUsers, eachPerson.id);
+      sortUsersBasedOnPriority(users, allowedUsers, user);
     }
     // General queue
-    else if (eachPerson.arrival <= checkInTime.end) {
-      sortUsersBasedonPriority(input, allowedUsers, eachPerson.id);
+    else if (user.arrival <= checkInTime.end) {
+      sortUsersBasedOnPriority(users, allowedUsers, user);
     }
     // not allowed users
     else {
-      notAllowedUsers.push(eachPerson.id);
+      notAllowedUsers.push(user.id);
     }
   }
 

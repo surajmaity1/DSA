@@ -68,4 +68,12 @@ export const testUsers: UserInfo[] = [
     id: 10,
     arrival: 12,
   },
+  {
+    id: 11,
+    arrival: 8,
+    slot: {
+      start: 11.45,
+      end: 12,
+    },
+  },
 ];
