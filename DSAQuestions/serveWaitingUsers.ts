@@ -130,9 +130,15 @@ export function serveWaitingUsers(
   checkInTime: TimeSlot,
 ): Result {
   if (checkInTime.isCancelled === true) {
+    const notAllowedUsers: number[] = [];
+
+    for (let index = 0; index < users.length; index++) {
+      notAllowedUsers.push(users[index].id);
+    }
+
     return {
       allowed: [],
-      notAllowed: [...],
+      notAllowed: notAllowedUsers,
     };
   }
 

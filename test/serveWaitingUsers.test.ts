@@ -94,9 +94,11 @@ describe("Serve Waiting Users", () => {
   });
 
   it("should not allowed all users when ride is cancelled", () => {
-    expect(serveWaitingUsers(testUsers, testTimeSlots[0])).to.be.deep.equal({
+    expect(
+      serveWaitingUsers(testUsers, { ...testTimeSlots[0], isCancelled: true }),
+    ).to.be.deep.equal({
       allowed: [],
-      notAllowed: [],
+      notAllowed: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
     });
   });
 });
