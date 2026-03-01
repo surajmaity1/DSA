@@ -52,4 +52,51 @@ describe("Serve Waiting Users", () => {
       notAllowed: [3, 0],
     });
   });
+
+  it("should allow every 3 users where one user must be from general queue", () => {
+    expect(
+      serveWaitingUsers(
+        [
+          testUsers[1],
+          testUsers[4],
+          testUsers[8],
+          testUsers[2],
+          testUsers[6],
+          testUsers[11],
+        ],
+        testTimeSlots[0],
+      ),
+    ).to.be.deep.equal({
+      allowed: [1, 11, 2, 8, 4, 6],
+      notAllowed: [],
+    });
+  });
+
+  it("should prioritize genral queue based on arrival time when lightening queue empty", () => {
+    expect(
+      serveWaitingUsers(
+        [
+          testUsers[0],
+          testUsers[2],
+          testUsers[3],
+          testUsers[5],
+          testUsers[6],
+          testUsers[7],
+          testUsers[9],
+          testUsers[10],
+        ],
+        testTimeSlots[0],
+      ),
+    ).to.be.deep.equal({
+      allowed: [9, 2, 7, 6, 5, 10],
+      notAllowed: [0, 3],
+    });
+  });
+
+  it("should not allowed all users when ride is cancelled", () => {
+    expect(serveWaitingUsers(testUsers, testTimeSlots[0])).to.be.deep.equal({
+      allowed: [],
+      notAllowed: [],
+    });
+  });
 });

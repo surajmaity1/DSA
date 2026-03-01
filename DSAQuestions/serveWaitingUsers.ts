@@ -1,37 +1,7 @@
-/*
-// Note: DRAFT
-Question:
-
-first pass: Lightening Queue
-Time slot: 1.00 to 1.15
-
-Queue:
-    1. General Queue
-    2. Lighten Queue
-
-Condition of Lighten Queue:
-    1. Enter queue when time has reached
-    2. For every 3 users in lightening ( 1 must be from general)
-
-
-----
-
-Edge cases:
-- 1. Two users arrive at the same time.
-- 2. General is empty
-- 3. Ride is cancelled.
-- 4. Verficiation taking time even coming at the correct time.
-
-Construction:
-
-Person p1:
-- arrival time
-- time slot
-*/
-
 export type TimeSlot = {
   start: number;
   end: number;
+  isCancelled?: boolean;
 };
 
 export type UserInfo = {
@@ -123,7 +93,9 @@ function sortUsersBasedOnPriority(
     const userId = allowedUsers[index];
     const currentAllowedUser = users.filter((user) => user.id === userId)[0];
 
-    // console.log(`before index: ${index}, user.length: ${allowedUsers.length}`);
+    // console.log(
+    //   `insert user: ${newUser.id} | before index: ${index}, user.length: ${allowedUsers.length}`,
+    // );
     if (
       currentAllowedUser.arrival === newUser.arrival &&
       !currentAllowedUser.slot &&
@@ -131,6 +103,7 @@ function sortUsersBasedOnPriority(
     ) {
       allowedUsers.splice(index, 0, newUser.id);
       index++;
+      break;
       // console.log("current user id", userId, "inside if");
     } else if (
       currentAllowedUser.arrival !== newUser.arrival &&
@@ -139,11 +112,16 @@ function sortUsersBasedOnPriority(
     ) {
       if (currentAllowedUser.slot.start > newUser.slot.start) {
         allowedUsers.splice(index, 0, newUser.id);
-        index++;
+      } else {
+        allowedUsers.splice(index + 1, 0, newUser.id);
       }
+      index++;
+      break;
     }
 
-    // console.log(`after index: ${index}, user.length: ${allowedUsers.length}`);
+    // console.log(
+    //   `insert user: ${newUser.id} | after index: ${index}, user.length: ${allowedUsers.length}`,
+    // );
   }
 }
 
@@ -151,6 +129,13 @@ export function serveWaitingUsers(
   users: UserInfo[],
   checkInTime: TimeSlot,
 ): Result {
+  if (checkInTime.isCancelled === true) {
+    return {
+      allowed: [],
+      notAllowed: [...],
+    };
+  }
+
   if (users.length === 0) {
     return {
       allowed: [],
@@ -161,6 +146,7 @@ export function serveWaitingUsers(
   // store id
   const notAllowedUsers = [];
   const allowedUsers: number[] = [];
+  const generalQueue: UserInfo[] = [];
 
   for (let index = 0; index < users.length; index++) {
     const user = users[index];
@@ -176,11 +162,42 @@ export function serveWaitingUsers(
     }
     // General queue
     else if (user.arrival <= checkInTime.end) {
-      sortUsersBasedOnPriority(users, allowedUsers, user);
+      let isInserted = false;
+      for (let index = 0; index < generalQueue.length; index++) {
+        const existingUser = generalQueue[index];
+        if (user.arrival < existingUser.arrival) {
+          isInserted = true;
+          generalQueue.splice(index, 0, user);
+          break;
+        }
+      }
+
+      if (!isInserted) {
+        generalQueue.push(user);
+      }
     }
     // not allowed users
     else {
       notAllowedUsers.push(user.id);
+    }
+  }
+
+  // Check whether LQ's users present or not
+  if (allowedUsers.length > 0) {
+    // After prioritise LQ, place GQ's user at correct position as requirement.
+    let insertionPosition = 2;
+    while (generalQueue.length > 0) {
+      const generalQueueUser = generalQueue.shift();
+      if (!generalQueueUser) {
+        break;
+      }
+      allowedUsers.splice(insertionPosition, 0, generalQueueUser?.id);
+      insertionPosition += 3;
+    }
+  } else {
+    // only general queue users present
+    for (let index = 0; index < generalQueue.length; index++) {
+      allowedUsers.push(generalQueue[index].id);
     }
   }
 
