@@ -33,7 +33,7 @@ steps:
 
 steps:
 
-- Parent - red
+- Parent - black
 - Uncle - red
 - New node - red
 
