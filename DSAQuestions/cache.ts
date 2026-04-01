@@ -33,70 +33,86 @@ asking the right questions, gathering requirements, solutioning, writing code, w
 type cache = {
   value: string;
   found: boolean;
+  performCacheSearch: boolean;
 };
 
-const mainStorage = new Map();
+type storageValue = {
+  value: string;
+  searchOccurrence: number;
+};
 
-const cacheStorage = new Map();
+export type storage = {
+  key: number;
+  value: string;
+};
 
-function search(key: number): string {
-  if (key < 0) {
-    return "Invalid key found";
+const mainStorage: Map<number, string> = new Map();
+const cacheStorage: Map<number, storageValue> = new Map();
+const MAX_CACHE_VALUE_LIMIT = 20;
+const MAX_CACHE_TIME_LIMIT = 20;
+
+function insertCache(key: number, value: string, searchOccurrence: number) {
+  if (cacheStorage.size >= MAX_CACHE_VALUE_LIMIT) {
+    deleteCache();
   }
-
-  const { value, found } = searchCache(key);
-
-  if (found) {
-    return value;
-  }
-
-  return "Not found";
+  cacheStorage.set(key, { value, searchOccurrence });
 }
 
-function insertCache(key: number, value: string) {
-  cacheStorage.set(key, value);
+function deleteCache() {
+  let leastSearchOccurrenceKey = Number.POSITIVE_INFINITY;
+
+  for (const [key, value] of cacheStorage.entries()) {
+    if (value.searchOccurrence < leastSearchOccurrenceKey) {
+      leastSearchOccurrenceKey = key;
+    }
+  }
+
+  console.log(`deleted value: ${leastSearchOccurrenceKey}`);
+  cacheStorage.delete(leastSearchOccurrenceKey);
 }
 
-function searchCache(key: number): cache {
+export function search(key: number): cache {
   const chacheStorageValue = cacheStorage.get(key);
 
   if (!chacheStorageValue) {
     const mainStorageValue = mainStorage.get(key);
 
     if (!mainStorageValue) {
-      return { value: "", found: false };
+      return { value: "", found: false, performCacheSearch: false };
     }
 
-    insertCache(key, mainStorageValue);
-    console.log("main storage used");
+    insertCache(key, mainStorageValue, 1);
 
     return {
       value: mainStorageValue,
-
       found: true,
+      performCacheSearch: false,
     };
   }
 
-  console.log("cache storage used");
+  const { value, searchOccurrence } = chacheStorageValue;
+  chacheStorageValue.searchOccurrence = searchOccurrence + 1;
 
   return {
-    value: chacheStorageValue,
-
+    value,
     found: true,
+    performCacheSearch: true,
   };
 }
 
-function initializeValue() {
-  mainStorage.set(1, "Amit");
-  mainStorage.set(2, "Arun");
-  mainStorage.set(3, "Kav");
-  mainStorage.set(4, "Abhi");
-  mainStorage.set(5, "Arit");
+export function insert(storage: storage[]) {
+  for (let index = 0; index < storage.length; index++) {
+    const data: storage = storage[index];
+    mainStorage.set(data.key, data.value);
+  }
 }
 
-initializeValue();
-
-const id = 2;
-
-console.log(`Find the person with id ${id}: ${search(id)}`);
-console.log(`Find the person with id ${id}: ${search(id)}`);
+export function clearCache(someOperation: any) {
+  setInterval(() => {
+    // console.log("20 seconds have passed:", new Date().toLocaleTimeString());
+    // console.log("clearning the cache...");
+    cacheStorage.clear();
+    // console.log("cache cleared...");
+    someOperation();
+  }, MAX_CACHE_TIME_LIMIT * 1000);
+}

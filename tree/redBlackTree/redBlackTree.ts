@@ -31,10 +31,12 @@ function insert(root: node | null, value: number): node {
   }
 
   let currentNode: node | null = root;
-  let previousNode: node = currentNode;
+  let parentNode: node = currentNode;
+  let grandParentNode: node = currentNode;
 
   while (currentNode !== null) {
-    previousNode = currentNode;
+    grandParentNode = parentNode;
+    parentNode = currentNode;
 
     if (value < currentNode.value) {
       currentNode = currentNode.left;
@@ -46,46 +48,56 @@ function insert(root: node | null, value: number): node {
     }
   }
 
-  if (value < previousNode.value) {
-    previousNode.left = createNode(value);
+  if (value < parentNode.value) {
+    parentNode.left = createNode(value);
   } else {
-    previousNode.right = createNode(value);
+    parentNode.right = createNode(value);
   }
 
-  root = validateRedBlackTree(root);
+  root = validateRedBlackTree(root, grandParentNode, parentNode);
   // inOrderTraversal(root);
 
   return root;
 }
 
-function validateRedBlackTree(root: node): node {
+function validateRedBlackTree(
+  root: node,
+  grandParentNode: node,
+  parentNode: node,
+): node {
   if (!root) {
     console.log("Tree not found");
     return root;
   }
 
-  let currentNode: node = root;
+  if (!parentNode.colour) {
+    return root;
+  }
 
-  while (currentNode !== null) {
-    if (currentNode.colour) {
-      if (currentNode.left !== null && currentNode.colour) {
-        // violate the condition
-      } else if (currentNode.right !== null && currentNode.colour) {
-        // violate the condition
-      }
-    } else {
-      if (currentNode.left !== null && !currentNode.colour) {
-        // violate the condition
-      } else if (currentNode.right !== null && !currentNode.colour) {
-        // violate the condition
-      }
+  let uncleNode;
+
+  if (grandParentNode.left?.value !== parentNode.value) {
+    uncleNode = grandParentNode.left;
+  } else {
+    uncleNode = grandParentNode.right;
+  }
+
+  if (uncleNode?.colour) {
+    // recolouring
+    uncleNode.colour = false;
+    parentNode.colour = false;
+
+    if (grandParentNode.value !== root.value) {
+      grandParentNode.colour = true;
     }
+  } else {
+    // rotate
   }
 
   return root;
 }
 
-export function insertNode(input: number[]): node {
+export function insertNode(input: number[]): node | null {
   let root: node | null = null;
 
   for (let index = 0; index < input.length; index++) {
