@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { createTrie } from "./fixtures/trie.js";
 import {
   createNode,

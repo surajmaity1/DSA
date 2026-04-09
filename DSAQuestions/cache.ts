@@ -48,11 +48,11 @@ export type storage = {
 
 const mainStorage: Map<number, string> = new Map();
 const cacheStorage: Map<number, storageValue> = new Map();
-const MAX_CACHE_VALUE_LIMIT = 20;
+const MAX_CACHE_STORAGE_LIMIT = 20;
 const MAX_CACHE_TIME_LIMIT = 20;
 
 function insertCache(key: number, value: string, searchOccurrence: number) {
-  if (cacheStorage.size >= MAX_CACHE_VALUE_LIMIT) {
+  if (cacheStorage.size >= MAX_CACHE_STORAGE_LIMIT) {
     deleteCache();
   }
   cacheStorage.set(key, { value, searchOccurrence });
@@ -67,7 +67,7 @@ function deleteCache() {
     }
   }
 
-  console.log(`deleted value: ${leastSearchOccurrenceKey}`);
+  // console.log(`deleted value with key: ${leastSearchOccurrenceKey}`);
   cacheStorage.delete(leastSearchOccurrenceKey);
 }
 
@@ -109,10 +109,7 @@ export function insert(storage: storage[]) {
 
 export function clearCache(someOperation: any) {
   setInterval(() => {
-    // console.log("20 seconds have passed:", new Date().toLocaleTimeString());
-    // console.log("clearning the cache...");
     cacheStorage.clear();
-    // console.log("cache cleared...");
     someOperation();
   }, MAX_CACHE_TIME_LIMIT * 1000);
 }

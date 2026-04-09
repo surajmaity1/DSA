@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { describe, it, expect } from "vitest";
 import { serveWaitingUsers } from "../DSAQuestions/serveWaitingUsers.ts";
 import { testUsers, testTimeSlots } from "./fixtures/serveWaitingUsers.ts";
 

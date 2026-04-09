@@ -1,0 +1,1 @@
+export const testNodeValue = [10, 20, 30];

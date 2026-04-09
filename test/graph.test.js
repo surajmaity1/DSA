@@ -1,7 +1,6 @@
-import { expect } from "chai";
+import { describe, beforeEach, it } from "vitest";
 import { addVertex, displayList } from "../Graph/js/graphAdjacencyList.js";
 
-// incomplete
 describe("Graph", () => {
   let graph;
 

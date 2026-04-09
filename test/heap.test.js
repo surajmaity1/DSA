@@ -1,6 +1,5 @@
 import MaxHeap from "../Heap/js/MaxHeap.js";
 import MinHeap from "../Heap/js/MinHeap.js";
-import { expect } from "chai";
 
 describe("MaxHeap", () => {
   it("should create an empty max heap", () => {
@@ -251,7 +250,7 @@ describe("MinHeap", () => {
   });
   // ---------------------
 
-  it('should be possible to find item indices in heap', () => {
+  it("should be possible to find item indices in heap", () => {
     const minHeap = new MinHeap();
 
     minHeap.add(3);
@@ -260,14 +259,14 @@ describe("MinHeap", () => {
     minHeap.add(11);
     minHeap.add(11);
 
-    expect(minHeap.toString()).to.be.equal('3,11,10,12,11');
+    expect(minHeap.toString()).to.be.equal("3,11,10,12,11");
 
     expect(minHeap.find(5)).to.be.eql([]);
     expect(minHeap.find(3)).to.be.eql([0]);
     expect(minHeap.find(11)).to.be.eql([1, 4]);
   });
 
-  it('should be possible to remove items from heap with heapify down', () => {
+  it("should be possible to remove items from heap with heapify down", () => {
     const minHeap = new MinHeap();
 
     minHeap.add(3);
@@ -276,15 +275,15 @@ describe("MinHeap", () => {
     minHeap.add(11);
     minHeap.add(11);
 
-    expect(minHeap.toString()).to.be.equal('3,11,10,12,11');
+    expect(minHeap.toString()).to.be.equal("3,11,10,12,11");
 
-    expect(minHeap.remove(3).toString()).to.be.equal('10,11,11,12');
+    expect(minHeap.remove(3).toString()).to.be.equal("10,11,11,12");
     expect(minHeap.remove(3).peek()).to.be.equal(10);
-    expect(minHeap.remove(11).toString()).to.be.equal('10,12');
+    expect(minHeap.remove(11).toString()).to.be.equal("10,12");
     expect(minHeap.remove(3).peek()).to.be.equal(10);
   });
 
-  it('should be possible to remove items from heap with heapify up', () => {
+  it("should be possible to remove items from heap with heapify up", () => {
     const minHeap = new MinHeap();
 
     minHeap.add(3);
@@ -298,29 +297,29 @@ describe("MinHeap", () => {
     minHeap.add(2);
     minHeap.add(1);
 
-    expect(minHeap.toString()).to.be.equal('1,2,4,6,3,5,6,10,8,7');
-    expect(minHeap.remove(8).toString()).to.be.equal('1,2,4,6,3,5,6,10,7');
-    expect(minHeap.remove(7).toString()).to.be.equal('1,2,4,6,3,5,6,10');
-    expect(minHeap.remove(1).toString()).to.be.equal('2,3,4,6,10,5,6');
-    expect(minHeap.remove(2).toString()).to.be.equal('3,6,4,6,10,5');
-    expect(minHeap.remove(6).toString()).to.be.equal('3,5,4,10');
-    expect(minHeap.remove(10).toString()).to.be.equal('3,5,4');
-    expect(minHeap.remove(5).toString()).to.be.equal('3,4');
-    expect(minHeap.remove(3).toString()).to.be.equal('4');
-    expect(minHeap.remove(4).toString()).to.be.equal('');
+    expect(minHeap.toString()).to.be.equal("1,2,4,6,3,5,6,10,8,7");
+    expect(minHeap.remove(8).toString()).to.be.equal("1,2,4,6,3,5,6,10,7");
+    expect(minHeap.remove(7).toString()).to.be.equal("1,2,4,6,3,5,6,10");
+    expect(minHeap.remove(1).toString()).to.be.equal("2,3,4,6,10,5,6");
+    expect(minHeap.remove(2).toString()).to.be.equal("3,6,4,6,10,5");
+    expect(minHeap.remove(6).toString()).to.be.equal("3,5,4,10");
+    expect(minHeap.remove(10).toString()).to.be.equal("3,5,4");
+    expect(minHeap.remove(5).toString()).to.be.equal("3,4");
+    expect(minHeap.remove(3).toString()).to.be.equal("4");
+    expect(minHeap.remove(4).toString()).to.be.equal("");
   });
 
-  it('should be possible to remove items from heap with custom finding comparator', () => {
+  it("should be possible to remove items from heap with custom finding comparator", () => {
     const minHeap = new MinHeap();
-    minHeap.add('dddd');
-    minHeap.add('ccc');
-    minHeap.add('bb');
-    minHeap.add('a');
+    minHeap.add("dddd");
+    minHeap.add("ccc");
+    minHeap.add("bb");
+    minHeap.add("a");
 
-    expect(minHeap.toString()).to.be.equal('a,bb,ccc,dddd');
+    expect(minHeap.toString()).to.be.equal("a,bb,ccc,dddd");
   });
 
-  it('should remove values from heap and correctly re-order the tree', () => {
+  it("should remove values from heap and correctly re-order the tree", () => {
     const minHeap = new MinHeap();
 
     minHeap.add(1);
@@ -333,12 +332,12 @@ describe("MinHeap", () => {
     minHeap.add(8);
     minHeap.add(9);
 
-    expect(minHeap.toString()).to.be.equal('1,2,3,4,5,6,7,8,9');
+    expect(minHeap.toString()).to.be.equal("1,2,3,4,5,6,7,8,9");
 
     minHeap.remove(2);
-    expect(minHeap.toString()).to.be.equal('1,4,3,8,5,6,7,9');
+    expect(minHeap.toString()).to.be.equal("1,4,3,8,5,6,7,9");
 
     minHeap.remove(4);
-    expect(minHeap.toString()).to.be.equal('1,5,3,8,9,6,7');
+    expect(minHeap.toString()).to.be.equal("1,5,3,8,9,6,7");
   });
 });

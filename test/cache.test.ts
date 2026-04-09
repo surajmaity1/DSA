@@ -1,7 +1,6 @@
-import { describe } from "mocha";
+import { describe, it, expect } from "vitest";
 import { clearCache, insert, search } from "../DSAQuestions/cache.ts";
 import { testStorage } from "./fixtures/cache.ts";
-import { expect } from "chai";
 import sinon from "sinon";
 
 describe("cache", () => {
