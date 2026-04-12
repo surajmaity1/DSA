@@ -1,4 +1,3 @@
-// TODO: fix this
 export type node = {
   value: number;
   left: node | null;
@@ -41,9 +40,6 @@ export function levelOrder(root: node | null) {
     }
 
     result.push(popppedElement?.value);
-    console.log(
-      `node: ${popppedElement.value}, bf: ${popppedElement.balanceFactor}`,
-    );
 
     if (popppedElement?.left !== null) {
       queue.push(popppedElement?.left);
@@ -57,38 +53,102 @@ export function levelOrder(root: node | null) {
   return result;
 }
 
-function calculateHeight(root: node): number {
-  let leftSubTreeHeight = 0,
-    rightSubTreeHeight = 0;
-
-  if (root.left !== null) {
-    leftSubTreeHeight = root.left.height;
+function calculateHeight(root: node | null): number {
+  if (root === null) {
+    return -1;
   }
 
-  if (root.right !== null) {
-    rightSubTreeHeight = root.right.height;
-  }
-
-  return Math.max(leftSubTreeHeight, rightSubTreeHeight);
+  return Math.max(calculateHeight(root.left), calculateHeight(root.right)) + 1;
 }
 
 function calculateBalanceFactor(root: node): number {
-  let leftSubTreeBalanceFactor = 0;
-  let rightSubTreeBalanceFactor = 0;
+  return calculateHeight(root.left) - calculateHeight(root.right);
+}
 
-  if (root.left !== null) {
-    leftSubTreeBalanceFactor = root.left.balanceFactor;
+export function LRRotation(grandRoot: node): node {
+  const root = grandRoot.left;
+
+  if (root === null) {
+    return grandRoot;
   }
 
-  if (root.right !== null) {
-    rightSubTreeBalanceFactor = root.right.balanceFactor;
+  // LL Rotation
+  let child = root.right;
+
+  if (child === null) {
+    return grandRoot;
   }
 
-  return leftSubTreeBalanceFactor - rightSubTreeBalanceFactor;
+  const leftSubTreeOfChild = child?.left;
+  child.left = root;
+  root.right = leftSubTreeOfChild;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  grandRoot.left = child;
+
+  // RR Rotation
+  child = grandRoot.left;
+
+  grandRoot.left = child.right;
+  child.right = grandRoot;
+
+  grandRoot.height = calculateHeight(grandRoot);
+  child.height = calculateHeight(child);
+
+  grandRoot.balanceFactor = calculateBalanceFactor(grandRoot);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  return child;
+}
+
+export function RLRotation(grandRoot: node) {
+  const root = grandRoot.right;
+
+  if (root === null) {
+    return grandRoot;
+  }
+
+  // RR Rotation
+  let child = root.left;
+
+  if (child === null) {
+    return root;
+  }
+
+  root.left = child.right;
+  child.right = root;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  grandRoot.right = child;
+
+  // LL Rotation
+  child = grandRoot.right;
+
+  const leftSubTreeOfChild = child?.left;
+  child.left = grandRoot;
+  grandRoot.right = leftSubTreeOfChild;
+
+  grandRoot.height = calculateHeight(grandRoot);
+  child.height = calculateHeight(child);
+
+  grandRoot.balanceFactor = calculateBalanceFactor(grandRoot);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  return child;
 }
 
 export function LLRotation(root: node): node {
-  const child = root.right;
+  let child = root.right;
 
   if (child === null) {
     return root;
@@ -98,31 +158,30 @@ export function LLRotation(root: node): node {
   child.left = root;
   root.right = leftSubTreeOfChild;
 
-  // child.balanceFactor += 1;
-  // root.balanceFactor += 2;
-  if (child.value === 20) {
-    console.log(
-      ` before node ( ${child.value} ) height: ${child.height}, bf: ${child.balanceFactor}`,
-    );
-  }
-
-  child.height = calculateHeight(child);
   root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
 
-  if (child.value === 20) {
-    console.log(
-      `mid node ( ${child.value} ) height: ${child.height}, bf: ${child.balanceFactor}`,
-    );
-  }
-
-  child.balanceFactor = calculateBalanceFactor(child);
   root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
 
-  if (child.value === 20) {
-    console.log(
-      ` after node ( ${child.value} ) height: ${child.height}, bf: ${child.balanceFactor}`,
-    );
+  return child;
+}
+
+export function RRRotation(root: node): node {
+  let child = root.left;
+
+  if (child === null) {
+    return root;
   }
+
+  root.left = child.right;
+  child.right = root;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
 
   return child;
 }
@@ -141,15 +200,21 @@ function insertRecursive(root: node | null, value: number): node {
     root.right = insertRecursive(root.right, value);
   }
 
-  root.height = calculateHeight(root) + 1;
+  root.height = calculateHeight(root);
+  root.balanceFactor = calculateBalanceFactor(root);
 
   // perform rotation
-  if (root.height < -1 || root.height > 1) {
-    if (root.balanceFactor === -2) {
+  if (root.balanceFactor < -1 || root.balanceFactor > 1) {
+    if (root.balanceFactor === 2 && root.left?.balanceFactor === -1) {
+      root = LRRotation(root);
+    } else if (root.balanceFactor === -2 && root.right?.balanceFactor === 1) {
+      root = RLRotation(root);
+    } else if (root.balanceFactor === -2) {
       root = LLRotation(root);
+    } else if (root.balanceFactor === 2) {
+      root = RRRotation(root);
     }
   }
-  // console.log(`root: ${root.value}, bf: ${root.balanceFactor}`);
 
   return root;
 }
@@ -163,4 +228,74 @@ export function insertNode(input: number[]): node | null {
   }
 
   return root;
+}
+
+export function deleteNodeRecursive(
+  root: node | null,
+  value: number,
+): node | null {
+  if (root === null) {
+    return root;
+  }
+
+  if (value < root.value) {
+    root.left = deleteNodeRecursive(root.left, value);
+  } else if (value > root.value) {
+    root.right = deleteNodeRecursive(root.right, value);
+  } else {
+    if (root.left !== null && root.right !== null) {
+      const inorderSuccessorValue = findInorderSuccessor(root);
+      // console.log(`inorderSuccessor.value: ${inorderSuccessorValue}`)
+      root.value = inorderSuccessorValue;
+    } else if (root.left === null) {
+      return root.right;
+    } else if (root.right === null) {
+      return root.left;
+    } else {
+      return null;
+    }
+  }
+
+  root.height = calculateHeight(root);
+  root.balanceFactor = calculateBalanceFactor(root);
+
+  // perform rotation
+  if (root.balanceFactor < -1 || root.balanceFactor > 1) {
+    if (root.balanceFactor === 2 && root.left?.balanceFactor === -1) {
+      root = LRRotation(root);
+    } else if (root.balanceFactor === -2 && root.right?.balanceFactor === 1) {
+      root = RLRotation(root);
+    } else if (root.balanceFactor === -2) {
+      root = LLRotation(root);
+    } else if (root.balanceFactor === 2) {
+      root = RRRotation(root);
+    }
+  }
+
+  return root;
+}
+
+function findInorderSuccessor(root: node): number {
+  let previousNode: node | null = root;
+  let nextNode = root.right;
+
+  if (!nextNode) {
+    return root.value;
+  }
+
+  while (nextNode?.left !== null) {
+    previousNode = nextNode;
+    nextNode = nextNode?.left;
+  }
+
+  if (previousNode.value === root.value) {
+    previousNode.right = null;
+  } else {
+    previousNode.left = null;
+  }
+
+  previousNode.height = calculateHeight(previousNode);
+  previousNode.balanceFactor = calculateBalanceFactor(previousNode);
+
+  return nextNode.value;
 }
