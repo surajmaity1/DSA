@@ -3,6 +3,8 @@ export type node = {
   left: node | null;
   right: node | null;
   colour: boolean; // RED: true, BLACK: false
+  height: number;
+  balanceFactor: number;
 };
 
 function createNode(value: number): node {
@@ -11,6 +13,8 @@ function createNode(value: number): node {
     left: null,
     right: null,
     colour: true,
+    height: 0,
+    balanceFactor: 0,
   };
 }
 
@@ -22,6 +26,155 @@ function inOrderTraversal(root: node | null) {
   }
 }
 
+function calculateHeight(root: node | null): number {
+  if (root === null) {
+    return -1;
+  }
+
+  return Math.max(calculateHeight(root.left), calculateHeight(root.right)) + 1;
+}
+
+function calculateBalanceFactor(root: node): number {
+  return calculateHeight(root.left) - calculateHeight(root.right);
+}
+
+export function LRRotation(grandRoot: node): node {
+  const root = grandRoot.left;
+
+  if (root === null) {
+    return grandRoot;
+  }
+
+  // LL Rotation
+  let child = root.right;
+
+  if (child === null) {
+    return grandRoot;
+  }
+
+  const leftSubTreeOfChild = child?.left;
+  child.left = root;
+  root.right = leftSubTreeOfChild;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  grandRoot.left = child;
+
+  // RR Rotation
+  child = grandRoot.left;
+
+  grandRoot.left = child.right;
+  child.right = grandRoot;
+
+  grandRoot.height = calculateHeight(grandRoot);
+  child.height = calculateHeight(child);
+
+  grandRoot.balanceFactor = calculateBalanceFactor(grandRoot);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  // colouring
+  child.colour = false;
+  grandRoot.colour = true;
+
+  return child;
+}
+
+export function RLRotation(grandRoot: node) {
+  const root = grandRoot.right;
+
+  if (root === null) {
+    return grandRoot;
+  }
+
+  // RR Rotation
+  let child = root.left;
+
+  if (child === null) {
+    return root;
+  }
+
+  root.left = child.right;
+  child.right = root;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  grandRoot.right = child;
+
+  // LL Rotation
+  child = grandRoot.right;
+
+  const leftSubTreeOfChild = child?.left;
+  child.left = grandRoot;
+  grandRoot.right = leftSubTreeOfChild;
+  grandRoot.colour = true;
+
+  grandRoot.height = calculateHeight(grandRoot);
+  child.height = calculateHeight(child);
+
+  grandRoot.balanceFactor = calculateBalanceFactor(grandRoot);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  // colouring
+  child.colour = false;
+
+  return child;
+}
+
+export function RRRotation(root: node): node {
+  let child = root.left;
+
+  if (child === null) {
+    return root;
+  }
+
+  root.left = child.right;
+  child.right = root;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  // colouring
+  child.colour = false;
+  root.colour = true;
+
+  return child;
+}
+
+export function LLRotation(root: node): node {
+  let child = root.right;
+
+  if (child === null) {
+    return root;
+  }
+
+  const leftSubTreeOfChild = child?.left;
+  child.left = root;
+  root.colour = true;
+  root.right = leftSubTreeOfChild;
+
+  root.height = calculateHeight(root);
+  child.height = calculateHeight(child);
+
+  root.balanceFactor = calculateBalanceFactor(root);
+  child.balanceFactor = calculateBalanceFactor(child);
+
+  child.colour = false;
+  root.colour = true;
+
+  return child;
+}
+
 function insert(root: node | null, value: number): node {
   if (root === null) {
     root = createNode(value);
@@ -30,68 +183,119 @@ function insert(root: node | null, value: number): node {
     return root;
   }
 
+  let previousNode = root;
   let currentNode: node | null = root;
-  let parentNode: node = currentNode;
-  let grandParentNode: node = currentNode;
+  const stack = [];
 
   while (currentNode !== null) {
-    grandParentNode = parentNode;
-    parentNode = currentNode;
+    previousNode = currentNode;
 
     if (value < currentNode.value) {
+      stack.push(currentNode);
       currentNode = currentNode.left;
     } else if (value > currentNode.value) {
+      stack.push(currentNode);
       currentNode = currentNode.right;
     } else {
-      console.log("Duplicate not allowed");
       return root;
     }
   }
 
-  if (value < parentNode.value) {
-    parentNode.left = createNode(value);
-  } else {
-    parentNode.right = createNode(value);
+  const newNode = createNode(value);
+
+  if (value < previousNode.value) {
+    previousNode.left = newNode;
+  } else if (value > previousNode.value) {
+    previousNode.right = newNode;
   }
 
-  root = validateRedBlackTree(root, grandParentNode, parentNode);
-  // inOrderTraversal(root);
+  while (stack.length > 0) {
+    const poppedNode = stack.pop();
+    let grandParent = null;
 
-  return root;
-}
+    if (poppedNode) {
+      poppedNode.height = calculateHeight(poppedNode);
+      poppedNode.balanceFactor = calculateBalanceFactor(poppedNode);
 
-function validateRedBlackTree(
-  root: node,
-  grandParentNode: node,
-  parentNode: node,
-): node {
-  if (!root) {
-    console.log("Tree not found");
-    return root;
-  }
+      if (
+        poppedNode.colour &&
+        (poppedNode.left?.colour || poppedNode.right?.colour)
+      ) {
+        const parent = poppedNode;
 
-  if (!parentNode.colour) {
-    return root;
-  }
+        if (stack.length > 0) {
+          const newPopped = stack.pop();
 
-  let uncleNode;
+          if (newPopped) {
+            grandParent = newPopped;
+            grandParent.height = calculateHeight(grandParent);
+            grandParent.balanceFactor = calculateBalanceFactor(grandParent);
+          }
+        }
 
-  if (grandParentNode.left?.value !== parentNode.value) {
-    uncleNode = grandParentNode.left;
-  } else {
-    uncleNode = grandParentNode.right;
-  }
+        if (grandParent !== null) {
+          const uncleNode =
+            grandParent.left?.value === parent.value
+              ? grandParent.right
+              : grandParent.left;
 
-  if (uncleNode?.colour) {
-    // recolouring
-    uncleNode.colour = false;
-    parentNode.colour = false;
+          // colouring
+          if (uncleNode !== null && uncleNode.colour) {
+            uncleNode.colour = false;
+            parent.colour = false;
 
-    if (grandParentNode.value !== root.value) {
-      grandParentNode.colour = true;
+            if (grandParent.value !== root.value) {
+              grandParent.colour = true;
+            }
+          }
+          // rotation
+          else if (
+            uncleNode === null ||
+            (uncleNode !== null && !uncleNode.colour)
+          ) {
+            if (
+              grandParent.balanceFactor < -1 ||
+              grandParent.balanceFactor > 1
+            ) {
+              if (
+                grandParent.balanceFactor >= 2 &&
+                grandParent.left !== null &&
+                grandParent.left?.balanceFactor <= -1
+              ) {
+                grandParent = LRRotation(grandParent);
+              } else if (
+                grandParent.balanceFactor <= -2 &&
+                grandParent.right !== null &&
+                grandParent.right?.balanceFactor >= 1
+              ) {
+                grandParent = RLRotation(grandParent);
+              } else if (grandParent.balanceFactor <= -2) {
+                grandParent = LLRotation(grandParent);
+              } else if (grandParent.balanceFactor >= 2) {
+                grandParent = RRRotation(grandParent);
+              }
+            }
+          }
+        }
+      }
     }
-  } else {
-    // rotate
+
+    if (grandParent !== null) {
+      const previousNode = stack.length > 0 ? stack[stack.length - 1] : null;
+
+      if (previousNode !== null) {
+        if (grandParent.value < previousNode.value) {
+          previousNode.left = grandParent;
+        } else if (grandParent.value > previousNode.value) {
+          previousNode.right = grandParent;
+        }
+
+        previousNode.height = calculateHeight(previousNode);
+        previousNode.balanceFactor = calculateBalanceFactor(previousNode);
+      } else {
+        root = grandParent;
+      }
+    }
   }
 
   return root;
@@ -108,17 +312,41 @@ export function insertNode(input: number[]): node | null {
   return root;
 }
 
-function main() {
-  const input = [10, 20, 30, 50, 40, 60, 70, 80, 4, 8];
-  //   const input = [10, 20, 30];
-  let root: node | null = null;
-
-  for (let index = 0; index < input.length; index++) {
-    const element = input[index];
-    root = insert(root, element);
+export function levelOrder(root: node | null) {
+  if (root === null) {
+    return [];
   }
 
-  // inOrderTraversal(root);
+  const queue = [root];
+  const result: number[] = [];
+
+  while (queue.length > 0) {
+    const popppedElement = queue.shift();
+
+    if (!popppedElement) {
+      break;
+    }
+
+    result.push(popppedElement?.value);
+    // console.log(
+    //   `node (${popppedElement.value}), col: ${popppedElement.colour}, bf: ${popppedElement.balanceFactor}, height: ${popppedElement.height}`,
+    // );
+
+    if (popppedElement?.left !== null) {
+      queue.push(popppedElement?.left);
+    }
+
+    if (popppedElement?.right !== null) {
+      queue.push(popppedElement?.right);
+    }
+  }
+
+  return result;
+}
+
+function main() {
+  const root = insertNode([30, 20, 10]);
+  console.log(levelOrder(root));
 }
 
 // main();
