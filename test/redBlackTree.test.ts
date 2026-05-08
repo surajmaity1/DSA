@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { insertNode } from "../tree/redBlackTree/redBlackTree.ts";
+import { deleteNode, insertNode } from "../tree/redBlackTree/redBlackTree.ts";
 
 describe("redBlackTree", () => {
   describe("insertNode", () => {
@@ -400,6 +400,68 @@ describe("redBlackTree", () => {
       expect(root?.right?.colour).to.be.equal(true);
       expect(root?.right?.height).to.be.equal(0);
       expect(root?.right?.balanceFactor).to.be.equal(0);
+    });
+  });
+
+  describe("deleteNode", () => {
+    it("should delete root from red black tree that has total one nodes", () => {
+      let root = insertNode([30]);
+
+      root = deleteNode(root, 30);
+
+      expect(root).to.be.equal(null);
+    });
+
+    it("should delete root from red black tree that has total two nodes", () => {
+      let root = insertNode([30, 40]);
+
+      root = deleteNode(root, 30);
+
+      expect(root?.value).to.be.equal(40);
+      expect(root?.colour).to.be.equal(false);
+      expect(root?.height).to.be.equal(0);
+      expect(root?.balanceFactor).to.be.equal(0);
+      expect(root?.left).to.be.equal(null);
+      expect(root?.right).to.be.equal(null);
+    });
+
+    it("should delete root from red black tree that has total two nodes", () => {
+      let root = insertNode([40, 30]);
+
+      root = deleteNode(root, 40);
+
+      expect(root?.value).to.be.equal(30);
+      expect(root?.colour).to.be.equal(false);
+      expect(root?.height).to.be.equal(0);
+      expect(root?.balanceFactor).to.be.equal(0);
+      expect(root?.left).to.be.equal(null);
+      expect(root?.right).to.be.equal(null);
+    });
+
+    it("should delete non-root node from red black tree that has total two nodes", () => {
+      let root = insertNode([40, 30]);
+
+      root = deleteNode(root, 30);
+
+      expect(root?.value).to.be.equal(40);
+      expect(root?.colour).to.be.equal(false);
+      expect(root?.height).to.be.equal(0);
+      expect(root?.balanceFactor).to.be.equal(0);
+      expect(root?.left).to.be.equal(null);
+      expect(root?.right).to.be.equal(null);
+    });
+
+    it("should delete non-root node from red black tree that has total two nodes", () => {
+      let root = insertNode([30, 40]);
+
+      root = deleteNode(root, 40);
+
+      expect(root?.value).to.be.equal(30);
+      expect(root?.colour).to.be.equal(false);
+      expect(root?.height).to.be.equal(0);
+      expect(root?.balanceFactor).to.be.equal(0);
+      expect(root?.left).to.be.equal(null);
+      expect(root?.right).to.be.equal(null);
     });
   });
 });

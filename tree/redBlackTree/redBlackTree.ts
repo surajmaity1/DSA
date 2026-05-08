@@ -301,6 +301,120 @@ function insert(root: node | null, value: number): node {
   return root;
 }
 
+export function deleteNode(root: node | null, value: number): node | null {
+  if (
+    root === null ||
+    (root.value === value && root.left === null && root.right === null)
+  ) {
+    return null;
+  }
+
+  let currentNode: node | null = root;
+  const stack: node[] = [];
+
+  while (currentNode !== null) {
+    if (value < currentNode.value) {
+      stack.push(currentNode);
+      currentNode = currentNode.left;
+    } else if (value > currentNode.value) {
+      stack.push(currentNode);
+      currentNode = currentNode.right;
+    } else {
+      let newRoot: node | null = null;
+
+      // leaf node
+      if (currentNode.left === null && currentNode.right === null) {
+        while (stack.length > 0) {
+          const poppedNode = stack.pop();
+
+          if (poppedNode) {
+            newRoot = poppedNode;
+          }
+
+          if (newRoot) {
+            if (newRoot.left && value === newRoot.left?.value) {
+              newRoot.left = null;
+            } else if (newRoot.right && value === newRoot.right?.value) {
+              newRoot.right = null;
+            }
+
+            newRoot.height = calculateHeight(newRoot);
+            newRoot.balanceFactor = calculateBalanceFactor(newRoot);
+          }
+        }
+      } else {
+        // non-leaf node
+        const successor = inorderSuccessor(currentNode);
+
+        if (successor !== null) {
+          if (
+            currentNode.value === root.value &&
+            currentNode.right?.value === successor.value
+          ) {
+            successor.colour = false;
+            newRoot = successor;
+          }
+        } else {
+          const predecessor = inorderPredecessor(currentNode);
+
+          if (predecessor !== null) {
+            if (
+              currentNode.value === root.value &&
+              currentNode.left?.value === predecessor?.value
+            ) {
+              predecessor.colour = false;
+              newRoot = predecessor;
+            }
+          }
+        }
+      }
+
+      root = newRoot;
+      break;
+    }
+  }
+
+  // while(stack.length > 0) {
+  //   const poppedNode = stack.pop();
+
+  //   if (poppedNode !== null) {
+  //     if (poppedNode?.left?.value === value) {
+
+  //     }
+  //   }
+  // }
+
+  return root;
+}
+
+function inorderPredecessor(root: node): node | null {
+  let successor = root.left;
+
+  if (successor === null) {
+    return null;
+  }
+
+  while (successor?.right !== null) {
+    successor = successor?.right;
+  }
+
+  return successor;
+}
+
+function inorderSuccessor(root: node): node | null {
+  let successor = root.right;
+
+  if (successor === null) {
+    return null;
+  }
+
+  while (successor?.left !== null) {
+    successor = successor?.left;
+  }
+
+  return successor;
+}
+
 export function insertNode(input: number[]): node | null {
   let root: node | null = null;
 
