@@ -11,7 +11,3 @@
 - B Tree
 - All leaf nodes are at same level
 - Every node must contain Math.ceil(m / 2 ) = 2 children
-
-#### Spanning Tree
-
-- https://en.wikipedia.org/wiki/Spanning_tree

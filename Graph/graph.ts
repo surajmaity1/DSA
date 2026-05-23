@@ -1,35 +1,123 @@
-type Graph = {
-  vertices: string[];
-  edges: number[];
-  directed: boolean;
+type CustomList = {
+  vertex: number;
+  weight: number;
 };
 
-type VertexType = {
-  vertex: string;
-  connect: (vertexValue: string, wieghtValue: number) => void;
+export type Graph = {
+  adjacencyList: Map<number, CustomList[]>;
 };
 
-export function graph(isDirected: boolean = false): Graph {
+export function constructGraph(): Graph {
   return {
-    vertices: [],
-    edges: [],
-    directed: isDirected,
+    adjacencyList: new Map(),
   };
 }
 
-export function insertVertex(graph: Graph, vertexValue: string): VertexType {
-  const vertex = vertexValue[0].toLowerCase();
-
-  if (!graph.vertices.includes(vertex)) {
-    graph.vertices.push(vertex);
+export function removeVertex(graph: Graph, vertex: number): boolean {
+  if (!getVertex(graph, vertex)) {
+    return false;
   }
 
-  return {
-    vertex,
-    connect: connect,
-  };
+  const neighbours = graph.adjacencyList.get(vertex)!;
+
+  for (let index = 0; index < neighbours.length; index++) {
+    const neighbourVertex = neighbours[index]!.vertex;
+
+    if (graph.adjacencyList.has(neighbourVertex)) {
+      graph.adjacencyList.set(
+        neighbourVertex,
+        graph.adjacencyList
+          .get(neighbourVertex)!
+          .filter((item) => item.vertex !== vertex),
+      );
+    }
+  }
+
+  graph.adjacencyList.delete(vertex);
+
+  return true;
 }
 
-function connect(vertexValue: string, wieghtValue: number) {
-    
+export function removeEdge(
+  graph: Graph,
+  oneVertex: number,
+  anotherVertex: number,
+) {
+  const edgeValue1 = getEdgeValue(graph, oneVertex, anotherVertex);
+  const edgeValue2 = getEdgeValue(graph, anotherVertex, oneVertex);
+
+  if (edgeValue1 !== undefined && edgeValue1 === edgeValue2) {
+    graph.adjacencyList.set(
+      oneVertex,
+      graph.adjacencyList
+        .get(oneVertex)!
+        .filter((item) => item.vertex !== anotherVertex),
+    );
+    graph.adjacencyList.set(
+      anotherVertex,
+      graph.adjacencyList
+        .get(anotherVertex)!
+        .filter((item) => item.vertex !== oneVertex),
+    );
+
+    return true;
+  }
+
+  return false;
+}
+
+export function getEdgeValue(
+  graph: Graph,
+  oneVertex: number,
+  anotherVertex: number,
+) {
+  return graph.adjacencyList
+    .get(oneVertex)
+    ?.find((edge) => edge.vertex === anotherVertex)?.weight;
+}
+
+export function addEdge(
+  graph: Graph,
+  oneVertex: number,
+  anotherVertex: number,
+  weight: number,
+): boolean {
+  if (
+    graph.adjacencyList.has(oneVertex) &&
+    graph.adjacencyList.has(anotherVertex)
+  ) {
+    graph.adjacencyList.get(oneVertex)!.push({
+      vertex: anotherVertex,
+      weight: weight,
+    });
+
+    graph.adjacencyList.get(anotherVertex)!.push({
+      vertex: oneVertex,
+      weight: weight,
+    });
+
+    return true;
+  }
+
+  return false;
+}
+
+export function getVertex(graph: Graph, vertex: number): boolean {
+  return graph.adjacencyList.has(vertex);
+}
+
+function addVertex(graph: Graph, vertex: number) {
+  if (graph.adjacencyList.has(vertex)) {
+    return false;
+  }
+
+  graph.adjacencyList.set(vertex, []);
+
+  return true;
+}
+
+export function addVertices(graph: Graph, input: number[]) {
+  for (let index = 0; index < input.length; index++) {
+    addVertex(graph, input[index]!);
+  }
 }
