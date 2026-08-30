@@ -1,7 +1,7 @@
 # Prims Algorithm
 
-- [Video](https://youtu.be/mJcZjjKzeqk)
 - Introduction to Algorithms book
+- [Video](https://youtu.be/mJcZjjKzeqk)
 
 #### Steps Implementation
 
